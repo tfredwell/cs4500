@@ -1,0 +1,392 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>cozmo_taste_game.robot.cozmo_robot &mdash; Cozmo Build a Plate Game 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="Cozmo Build a Plate Game 1.0.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Cozmo Build a Plate Game
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pages/setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pages/basic_program_flow.html">Basic Program Flow</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../cozmo_taste_game/cozmo_taste_game.html">cozmo_taste_game package</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Diagrams</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pages/class_diagrams.html">Class Diagrams</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Image Recognition</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pages/how_to_train.html">How to Train Cozmo to Recognize a New Food</a></li>
+</ul>
+<p class="caption"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pages/documentation.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pages/credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Cozmo Build a Plate Game</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>cozmo_taste_game.robot.cozmo_robot</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for cozmo_taste_game.robot.cozmo_robot</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">.robot</span> <span class="k">import</span> <span class="n">Robot</span>
+<span class="kn">from</span> <span class="nn">cozmo.util</span> <span class="k">import</span> <span class="n">degrees</span>
+<span class="kn">from</span> <span class="nn">cozmo.world</span> <span class="k">import</span> <span class="n">EvtNewCameraImage</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">randint</span><span class="p">,</span> <span class="n">getrandbits</span>
+<span class="kn">from</span> <span class="nn">cozmo.anim</span> <span class="k">import</span> <span class="n">Triggers</span>
+
+
+<div class="viewcode-block" id="CozmoRobot"><a class="viewcode-back" href="../../../cozmo_taste_game/cozmo_taste_game.robot.html#cozmo_taste_game.robot.cozmo_robot.CozmoRobot">[docs]</a><span class="k">class</span> <span class="nc">CozmoRobot</span><span class="p">(</span><span class="n">Robot</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Wrapper class for a :class:`cozmo.robot.Robot`&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cozmo</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cozmo</span> <span class="o">=</span> <span class="n">cozmo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_angle</span> <span class="o">=</span> <span class="mi">0</span>
+
+<div class="viewcode-block" id="CozmoRobot.add_event_handler"><a class="viewcode-back" href="../../../cozmo_taste_game/cozmo_taste_game.robot.html#cozmo_taste_game.robot.cozmo_robot.CozmoRobot.add_event_handler">[docs]</a>    <span class="k">def</span> <span class="nf">add_event_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">on_new_camera_image</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cozmo</span><span class="o">.</span><span class="n">add_event_handler</span><span class="p">(</span><span class="n">EvtNewCameraImage</span><span class="p">,</span> <span class="n">on_new_camera_image</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CozmoRobot.set_start_position"><a class="viewcode-back" href="../../../cozmo_taste_game/cozmo_taste_game.robot.html#cozmo_taste_game.robot.cozmo_robot.CozmoRobot.set_start_position">[docs]</a>    <span class="k">def</span> <span class="nf">set_start_position</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Sets the start position.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cozmo</span><span class="o">.</span><span class="n">set_head_angle</span><span class="p">(</span><span class="n">degrees</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">wait_for_completed</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cozmo</span><span class="o">.</span><span class="n">set_lift_height</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span><span class="o">.</span><span class="n">wait_for_completed</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="CozmoRobot.speak"><a class="viewcode-back" href="../../../cozmo_taste_game/cozmo_taste_game.robot.html#cozmo_taste_game.robot.cozmo_robot.CozmoRobot.speak">[docs]</a>    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Wrapper method for :meth:`~cozmo.robot.Robot.say_text`.</span>
+
+<span class="sd">        :param text: The text to say</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cozmo</span><span class="o">.</span><span class="n">say_text</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">text</span><span class="p">))</span><span class="o">.</span><span class="n">wait_for_completed</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="CozmoRobot.turn_in_place"><a class="viewcode-back" href="../../../cozmo_taste_game/cozmo_taste_game.robot.html#cozmo_taste_game.robot.cozmo_robot.CozmoRobot.turn_in_place">[docs]</a>    <span class="k">def</span> <span class="nf">turn_in_place</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Wrapper method for :meth:`~cozmo.robot.Robot.turn_in_place`.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">rotation_amount</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_rotation_amount</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_angle</span> <span class="o">+=</span> <span class="n">rotation_amount</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cozmo</span><span class="o">.</span><span class="n">turn_in_place</span><span class="p">(</span><span class="n">degrees</span><span class="p">(</span><span class="n">rotation_amount</span><span class="p">))</span><span class="o">.</span><span class="n">wait_for_completed</span><span class="p">()</span></div>
+
+    <span class="k">def</span> <span class="nf">__get_rotation_amount</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Gets an amount to rotate.</span>
+
+<span class="sd">        :return: The amount to rotate</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">min_rotate_angle</span> <span class="o">=</span> <span class="o">-</span><span class="mi">10</span>
+        <span class="n">max_rotate_angle</span> <span class="o">=</span> <span class="mi">10</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_angle</span> <span class="o">&lt;=</span> <span class="n">min_rotate_angle</span><span class="p">:</span>
+            <span class="n">rotation_amount</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">+</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_angle</span> <span class="o">&gt;=</span> <span class="n">max_rotate_angle</span><span class="p">:</span>
+            <span class="n">rotation_amount</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5</span> <span class="o">-</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rotation_amount</span> <span class="o">=</span> <span class="mi">5</span> <span class="k">if</span> <span class="n">getrandbits</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="o">-</span><span class="mi">5</span>
+
+            <span class="k">if</span> <span class="n">rotation_amount</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">rotation_amount</span> <span class="o">-=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">rotation_amount</span> <span class="o">+=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">rotation_amount</span>
+
+<div class="viewcode-block" id="CozmoRobot.react_positively"><a class="viewcode-back" href="../../../cozmo_taste_game/cozmo_taste_game.robot.html#cozmo_taste_game.robot.cozmo_robot.CozmoRobot.react_positively">[docs]</a>    <span class="k">def</span> <span class="nf">react_positively</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Performs a positive reaction. Chooses a random number</span>
+<span class="sd">        from 0 to 4 and plays reaction that is tied to that number.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">positive_reactions</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">Triggers</span><span class="o">.</span><span class="n">MajorWin</span><span class="p">,</span>
+            <span class="n">Triggers</span><span class="o">.</span><span class="n">CodeLabHappy</span><span class="p">,</span>
+            <span class="n">Triggers</span><span class="o">.</span><span class="n">CodeLabYes</span><span class="p">,</span>
+            <span class="n">Triggers</span><span class="o">.</span><span class="n">CodeLabAmazed</span><span class="p">,</span>
+            <span class="n">Triggers</span><span class="o">.</span><span class="n">CodeLabCelebrate</span>
+        <span class="p">]</span>
+
+        <span class="n">num</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">speak</span><span class="p">(</span><span class="s2">&quot;That is Perfect!&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__play_animation</span><span class="p">(</span><span class="n">positive_reactions</span><span class="p">[</span><span class="n">num</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__play_animation</span><span class="p">(</span><span class="n">positive_reactions</span><span class="p">[</span><span class="n">num</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">speak</span><span class="p">(</span><span class="s2">&quot;Thank you!&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__play_animation</span><span class="p">(</span><span class="n">Triggers</span><span class="o">.</span><span class="n">CodeLabCurious</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__play_animation</span><span class="p">(</span><span class="n">positive_reactions</span><span class="p">[</span><span class="n">num</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__play_animation</span><span class="p">(</span><span class="n">positive_reactions</span><span class="p">[</span><span class="n">num</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">speak</span><span class="p">(</span><span class="s2">&quot;Yes, you got it!&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__play_animation</span><span class="p">(</span><span class="n">positive_reactions</span><span class="p">[</span><span class="n">num</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="CozmoRobot.react_negatively"><a class="viewcode-back" href="../../../cozmo_taste_game/cozmo_taste_game.robot.html#cozmo_taste_game.robot.cozmo_robot.CozmoRobot.react_negatively">[docs]</a>    <span class="k">def</span> <span class="nf">react_negatively</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Performs a negative reaction. Chooses a random number</span>
+<span class="sd">        from 0 to 4 and plays reaction that is tied to that number.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">negative_reactions</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">Triggers</span><span class="o">.</span><span class="n">MajorFail</span><span class="p">,</span>
+            <span class="n">Triggers</span><span class="o">.</span><span class="n">CubeMovedUpset</span><span class="p">,</span>
+            <span class="n">Triggers</span><span class="o">.</span><span class="n">CodeLabUnhappy</span><span class="p">,</span>
+            <span class="n">Triggers</span><span class="o">.</span><span class="n">PounceFail</span><span class="p">,</span>
+            <span class="n">Triggers</span><span class="o">.</span><span class="n">CodeLabBored</span>
+        <span class="p">]</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__play_animation</span><span class="p">(</span><span class="n">negative_reactions</span><span class="p">[</span><span class="n">num</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">speak</span><span class="p">(</span><span class="s2">&quot;I don&#39;t need that&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__play_animation</span><span class="p">(</span><span class="n">negative_reactions</span><span class="p">[</span><span class="n">num</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">speak</span><span class="p">(</span><span class="s2">&quot;Try again please.&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__play_animation</span><span class="p">(</span><span class="n">Triggers</span><span class="o">.</span><span class="n">CodeLabCurious</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">speak</span><span class="p">(</span><span class="s2">&quot;No&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__play_animation</span><span class="p">(</span><span class="n">negative_reactions</span><span class="p">[</span><span class="n">num</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">speak</span><span class="p">(</span><span class="s2">&quot;That&#39;s not what I want.&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__play_animation</span><span class="p">(</span><span class="n">negative_reactions</span><span class="p">[</span><span class="n">num</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__play_animation</span><span class="p">(</span><span class="n">negative_reactions</span><span class="p">[</span><span class="n">num</span><span class="p">])</span></div>
+            
+<div class="viewcode-block" id="CozmoRobot.check_plate_and_celebrate"><a class="viewcode-back" href="../../../cozmo_taste_game/cozmo_taste_game.robot.html#cozmo_taste_game.robot.cozmo_robot.CozmoRobot.check_plate_and_celebrate">[docs]</a>    <span class="k">def</span> <span class="nf">check_plate_and_celebrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">deg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param distance: distance to drive in mm</span>
+<span class="sd">        :param speed: speed that cozmo will drive</span>
+<span class="sd">        :param deg: degrees cozmo will turn</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speak</span><span class="p">(</span><span class="s2">&quot;Congratulations, you filled up the plate!&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cozmo</span><span class="o">.</span><span class="n">turn_in_place</span><span class="p">(</span><span class="n">degrees</span><span class="p">(</span><span class="n">deg</span><span class="p">))</span><span class="o">.</span><span class="n">wait_for_completed</span><span class="p">()</span>
+        <span class="c1"># self.cozmo.drive_straight(distance_mm(distance), speed_mmps(speed)).wait_for_completed()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cozmo</span><span class="o">.</span><span class="n">play_anim_trigger</span><span class="p">(</span><span class="n">Triggers</span><span class="o">.</span><span class="n">PopAWheelieInitial</span><span class="p">,</span> <span class="n">ignore_body_track</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">wait_for_completed</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cozmo</span><span class="o">.</span><span class="n">play_anim_trigger</span><span class="p">(</span><span class="n">Triggers</span><span class="o">.</span><span class="n">FeedingAteFullEnough_Normal</span><span class="p">)</span><span class="o">.</span><span class="n">wait_for_completed</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cozmo</span><span class="o">.</span><span class="n">play_anim_trigger</span><span class="p">(</span><span class="n">Triggers</span><span class="o">.</span><span class="n">DriveEndHappy</span><span class="p">)</span><span class="o">.</span><span class="n">wait_for_completed</span><span class="p">()</span></div>
+
+    <span class="k">def</span> <span class="nf">__play_animation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">anim_trigger</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Wrapper method for :meth:`~cozmo.robot.Robot.play_anim_trigger`.</span>
+
+<span class="sd">        :param anim_trigger: The animation to perform</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cozmo</span><span class="o">.</span><span class="n">play_anim_trigger</span><span class="p">(</span><span class="n">anim_trigger</span><span class="p">,</span> <span class="n">ignore_body_track</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">wait_for_completed</span><span class="p">()</span></div>
+
+
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, The Cozmopolitans.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

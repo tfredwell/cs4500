@@ -1,0 +1,330 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Class Diagrams &mdash; Cozmo Build a Plate Game 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Cozmo Build a Plate Game 1.0.0 documentation" href="../index.html"/>
+        <link rel="next" title="How to Train Cozmo to Recognize a New Food" href="how_to_train.html"/>
+        <link rel="prev" title="cozmo_taste_game.robot package" href="../cozmo_taste_game/cozmo_taste_game.robot.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cozmo Build a Plate Game
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_program_flow.html">Basic Program Flow</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../cozmo_taste_game/cozmo_taste_game.html">cozmo_taste_game package</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Diagrams</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Class Diagrams</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#robot-package">Robot Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plate-package">Plate Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#food-package">Food Package</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Image Recognition</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="how_to_train.html">How to Train Cozmo to Recognize a New Food</a></li>
+</ul>
+<p class="caption"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cozmo Build a Plate Game</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Class Diagrams</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/pages/class_diagrams.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="class-diagrams">
+<h1>Class Diagrams<a class="headerlink" href="#class-diagrams" title="Permalink to this headline">¶</a></h1>
+<p>We have leveraged object oriented programming significantly in this project. Please review the following
+inheritance diagrams. Notice that in 3 different packages we have one abstract base class and multiple
+inheriting classes.</p>
+<div class="section" id="robot-package">
+<h2>Robot Package<a class="headerlink" href="#robot-package" title="Permalink to this headline">¶</a></h2>
+digraph inheritancedcc8079e4e {
+rankdir=LR;
+size=&quot;8.0, 12.0&quot;;
+  &quot;ABC&quot; [fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,tooltip=&quot;Helper class that provides a standard way to create an ABC using&quot;];
+  &quot;CozmoRobot&quot; [URL=&quot;../cozmo_taste_game/cozmo_taste_game.robot.html#cozmo_taste_game.robot.cozmo_robot.CozmoRobot&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;,tooltip=&quot;Wrapper class for a :class:`cozmo.robot.Robot`&quot;];
+  &quot;Robot&quot; -&gt; &quot;CozmoRobot&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;FakeRobot&quot; [URL=&quot;../cozmo_taste_game/cozmo_taste_game.robot.html#cozmo_taste_game.robot.fake_robot.FakeRobot&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;,tooltip=&quot;Fake robot used to simulate a game in the absence of Cozmo&quot;];
+  &quot;Robot&quot; -&gt; &quot;FakeRobot&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;Robot&quot; [URL=&quot;../cozmo_taste_game/cozmo_taste_game.robot.html#cozmo_taste_game.robot.robot.Robot&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;,tooltip=&quot;Abstract robot interface.&quot;];
+  &quot;ABC&quot; -&gt; &quot;Robot&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+}
+<p>The robot package has a Fake Robot and Cozmo Robot that both inherit from a abstract robot base class.
+Methods that are publicly called from main() must be included in the abstract base class and implemented
+in both of the inheriting classes. This allows the program to be ran without Cozmo which allows
+developers that do not have access to Cozmo to develop program control flow.</p>
+</div>
+<div class="section" id="plate-package">
+<h2>Plate Package<a class="headerlink" href="#plate-package" title="Permalink to this headline">¶</a></h2>
+digraph inheritancefe0915de63 {
+rankdir=LR;
+size=&quot;8.0, 12.0&quot;;
+  &quot;ABC&quot; [fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,tooltip=&quot;Helper class that provides a standard way to create an ABC using&quot;];
+  &quot;ColorfulPlate&quot; [URL=&quot;../cozmo_taste_game/cozmo_taste_game.plate.html#cozmo_taste_game.plate.colorful_plate.ColorfulPlate&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;,tooltip=&quot;Colorful plate class: the goal is to fill the plate with colorful foods.&quot;];
+  &quot;Plate&quot; -&gt; &quot;ColorfulPlate&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;Plate&quot; [URL=&quot;../cozmo_taste_game/cozmo_taste_game.plate.html#cozmo_taste_game.plate.plate.Plate&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;,tooltip=&quot;Abstract plate interface.&quot;];
+  &quot;ABC&quot; -&gt; &quot;Plate&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+}
+<p>The plate package contains different plates. A different Plate can easily be instantiated in main() which
+allows for a different twist on the game. Many Plates could be added to this package like a dessert plate
+or vegetarian plate!</p>
+</div>
+<div class="section" id="food-package">
+<h2>Food Package<a class="headerlink" href="#food-package" title="Permalink to this headline">¶</a></h2>
+digraph inheritance61825bdae3 {
+rankdir=LR;
+size=&quot;8.0, 12.0&quot;;
+  &quot;ABC&quot; [fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,tooltip=&quot;Helper class that provides a standard way to create an ABC using&quot;];
+  &quot;Banana&quot; [URL=&quot;../cozmo_taste_game/cozmo_taste_game.food.html#cozmo_taste_game.food.food_props.Banana&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;];
+  &quot;FoodProp&quot; -&gt; &quot;Banana&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;Blueberry&quot; [URL=&quot;../cozmo_taste_game/cozmo_taste_game.food.html#cozmo_taste_game.food.food_props.Blueberry&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;];
+  &quot;FoodProp&quot; -&gt; &quot;Blueberry&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;Broccoli&quot; [URL=&quot;../cozmo_taste_game/cozmo_taste_game.food.html#cozmo_taste_game.food.food_props.Broccoli&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;];
+  &quot;FoodProp&quot; -&gt; &quot;Broccoli&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;Carrot&quot; [URL=&quot;../cozmo_taste_game/cozmo_taste_game.food.html#cozmo_taste_game.food.food_props.Carrot&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;];
+  &quot;FoodProp&quot; -&gt; &quot;Carrot&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;Cheese&quot; [URL=&quot;../cozmo_taste_game/cozmo_taste_game.food.html#cozmo_taste_game.food.food_props.Cheese&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;];
+  &quot;FoodProp&quot; -&gt; &quot;Cheese&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;Corn&quot; [URL=&quot;../cozmo_taste_game/cozmo_taste_game.food.html#cozmo_taste_game.food.food_props.Corn&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;];
+  &quot;FoodProp&quot; -&gt; &quot;Corn&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;Cupcake&quot; [URL=&quot;../cozmo_taste_game/cozmo_taste_game.food.html#cozmo_taste_game.food.food_props.Cupcake&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;];
+  &quot;FoodProp&quot; -&gt; &quot;Cupcake&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;FoodProp&quot; [URL=&quot;../cozmo_taste_game/cozmo_taste_game.food.html#cozmo_taste_game.food.food_prop.FoodProp&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;,tooltip=&quot;Abstract Food Prop interface.&quot;];
+  &quot;ABC&quot; -&gt; &quot;FoodProp&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;Grapes&quot; [URL=&quot;../cozmo_taste_game/cozmo_taste_game.food.html#cozmo_taste_game.food.food_props.Grapes&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;];
+  &quot;FoodProp&quot; -&gt; &quot;Grapes&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;Hotdog&quot; [URL=&quot;../cozmo_taste_game/cozmo_taste_game.food.html#cozmo_taste_game.food.food_props.Hotdog&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;];
+  &quot;FoodProp&quot; -&gt; &quot;Hotdog&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;Milk&quot; [URL=&quot;../cozmo_taste_game/cozmo_taste_game.food.html#cozmo_taste_game.food.food_props.Milk&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;];
+  &quot;FoodProp&quot; -&gt; &quot;Milk&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;Orange&quot; [URL=&quot;../cozmo_taste_game/cozmo_taste_game.food.html#cozmo_taste_game.food.food_props.Orange&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;];
+  &quot;FoodProp&quot; -&gt; &quot;Orange&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;Watermelon&quot; [URL=&quot;../cozmo_taste_game/cozmo_taste_game.food.html#cozmo_taste_game.food.food_props.Watermelon&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;];
+  &quot;FoodProp&quot; -&gt; &quot;Watermelon&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+}
+<p>The food package includes all the different Food classes that inherit from the abstract Food Prop class.
+Each food class has properties that vary like colors.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="how_to_train.html" class="btn btn-neutral float-right" title="How to Train Cozmo to Recognize a New Food" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../cozmo_taste_game/cozmo_taste_game.robot.html" class="btn btn-neutral" title="cozmo_taste_game.robot package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, The Cozmopolitans.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

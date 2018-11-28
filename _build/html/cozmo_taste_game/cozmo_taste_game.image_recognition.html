@@ -1,0 +1,396 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>cozmo_taste_game.image_recognition package &mdash; Cozmo Build a Plate Game 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Cozmo Build a Plate Game 1.0.0 documentation" href="../index.html"/>
+        <link rel="up" title="cozmo_taste_game package" href="cozmo_taste_game.html"/>
+        <link rel="next" title="cozmo_taste_game.plate package" href="cozmo_taste_game.plate.html"/>
+        <link rel="prev" title="cozmo_taste_game.food package" href="cozmo_taste_game.food.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cozmo Build a Plate Game
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pages/setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pages/basic_program_flow.html">Basic Program Flow</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="cozmo_taste_game.html">cozmo_taste_game package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cozmo_taste_game.food.html">cozmo_taste_game.food package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">cozmo_taste_game.image_recognition package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-cozmo_taste_game.image_recognition.response_analyzer">cozmo_taste_game.image_recognition.response_analyzer module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-cozmo_taste_game.image_recognition.tensor_functions">cozmo_taste_game.image_recognition.tensor_functions module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cozmo_taste_game.plate.html">cozmo_taste_game.plate package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cozmo_taste_game.robot.html">cozmo_taste_game.robot package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cozmo_taste_game.html#module-cozmo_taste_game.taster">cozmo_taste_game.taster module</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Diagrams</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pages/class_diagrams.html">Class Diagrams</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Image Recognition</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pages/how_to_train.html">How to Train Cozmo to Recognize a New Food</a></li>
+</ul>
+<p class="caption"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pages/documentation.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pages/credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cozmo Build a Plate Game</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="cozmo_taste_game.html">cozmo_taste_game package</a> &raquo;</li>
+        
+      <li>cozmo_taste_game.image_recognition package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/cozmo_taste_game/cozmo_taste_game.image_recognition.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-cozmo_taste_game.image_recognition">
+<span id="cozmo-taste-game-image-recognition-package"></span><h1>cozmo_taste_game.image_recognition package<a class="headerlink" href="#module-cozmo_taste_game.image_recognition" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-cozmo_taste_game.image_recognition.response_analyzer">
+<span id="cozmo-taste-game-image-recognition-response-analyzer-module"></span><h2>cozmo_taste_game.image_recognition.response_analyzer module<a class="headerlink" href="#module-cozmo_taste_game.image_recognition.response_analyzer" title="Permalink to this headline">¶</a></h2>
+<p>Class responsible for analyzing the pictures Cozmo takes.
+At the moment, getFoundFood() will only return a valid value if the same
+Prop has been seen (streak_threshold) times in a row with a confidence &gt; (threshold)</p>
+<dl class="class">
+<dt id="cozmo_taste_game.image_recognition.response_analyzer.ResponseAnalyzer">
+<em class="property">class </em><code class="descclassname">cozmo_taste_game.image_recognition.response_analyzer.</code><code class="descname">ResponseAnalyzer</code><span class="sig-paren">(</span><em>threshold</em>, <em>streak_threshold</em>, <em>isDebugMode</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cozmo_taste_game/image_recognition/response_analyzer.html#ResponseAnalyzer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cozmo_taste_game.image_recognition.response_analyzer.ResponseAnalyzer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="method">
+<dt id="cozmo_taste_game.image_recognition.response_analyzer.ResponseAnalyzer.analyze_response">
+<code class="descname">analyze_response</code><span class="sig-paren">(</span><em>file_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cozmo_taste_game/image_recognition/response_analyzer.html#ResponseAnalyzer.analyze_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cozmo_taste_game.image_recognition.response_analyzer.ResponseAnalyzer.analyze_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analyze a photo at location file_name. You feed this function pictures, it analyzes them with
+the tensorflow model. Once it analyzes the picture, it sees if it has seen the same object more than
+(streak_threshold) times. If it has, it sets identified_food to what it has found.</p>
+<p>Upon entering the function, the has_been_checked flag gets flipped to False.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>file_name</strong> – location of a jpg file Cozmo has taken</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="cozmo_taste_game.image_recognition.response_analyzer.ResponseAnalyzer.force_input">
+<code class="descname">force_input</code><span class="sig-paren">(</span><em>foodItem</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cozmo_taste_game/image_recognition/response_analyzer.html#ResponseAnalyzer.force_input"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cozmo_taste_game.image_recognition.response_analyzer.ResponseAnalyzer.force_input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Force the response analyzer to see a food item</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>foodItem</strong> – a string of what cozmo should see</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="cozmo_taste_game.image_recognition.response_analyzer.ResponseAnalyzer.get_found_food">
+<code class="descname">get_found_food</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cozmo_taste_game/image_recognition/response_analyzer.html#ResponseAnalyzer.get_found_food"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cozmo_taste_game.image_recognition.response_analyzer.ResponseAnalyzer.get_found_food" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get what the response analyzer has decided Cozmo has seen
+Note: Only call this if you are sure cozmo has found something.
+Use has_found_food() before calling this function</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A string of what Cozmo has seen</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="cozmo_taste_game.image_recognition.response_analyzer.ResponseAnalyzer.has_found_food">
+<code class="descname">has_found_food</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cozmo_taste_game/image_recognition/response_analyzer.html#ResponseAnalyzer.has_found_food"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cozmo_taste_game.image_recognition.response_analyzer.ResponseAnalyzer.has_found_food" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if Cozmo has found food. Call this before calling get_found_food()</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if Cozmo has found something, False otherwise</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-cozmo_taste_game.image_recognition.tensor_functions">
+<span id="cozmo-taste-game-image-recognition-tensor-functions-module"></span><h2>cozmo_taste_game.image_recognition.tensor_functions module<a class="headerlink" href="#module-cozmo_taste_game.image_recognition.tensor_functions" title="Permalink to this headline">¶</a></h2>
+<p>This file contains code that runs tensorflow. Most of it should only be changed if the model type is switched,
+or you know what you are doing.</p>
+<dl class="function">
+<dt id="cozmo_taste_game.image_recognition.tensor_functions.allowed_file">
+<code class="descclassname">cozmo_taste_game.image_recognition.tensor_functions.</code><code class="descname">allowed_file</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cozmo_taste_game/image_recognition/tensor_functions.html#allowed_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cozmo_taste_game.image_recognition.tensor_functions.allowed_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks to see if the filename supplied is in ALLOWED_EXTENTIONS</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> – a file name to be checked</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">True if the filename is valid, False otherwise</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="cozmo_taste_game.image_recognition.tensor_functions.analyze_photo">
+<code class="descclassname">cozmo_taste_game.image_recognition.tensor_functions.</code><code class="descname">analyze_photo</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cozmo_taste_game/image_recognition/tensor_functions.html#analyze_photo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cozmo_taste_game.image_recognition.tensor_functions.analyze_photo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analyzes a photo, and returns a dict containing predictions and confidence</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> – the file name of the photo to be analyzed</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a dictionary with the form {‘name_of_food_1’ : confidence, …, ‘name_of_food_5 : confidence}</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="cozmo_taste_game.image_recognition.tensor_functions.load_graph">
+<code class="descclassname">cozmo_taste_game.image_recognition.tensor_functions.</code><code class="descname">load_graph</code><span class="sig-paren">(</span><em>model_file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cozmo_taste_game/image_recognition/tensor_functions.html#load_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cozmo_taste_game.image_recognition.tensor_functions.load_graph" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="cozmo_taste_game.image_recognition.tensor_functions.load_labels">
+<code class="descclassname">cozmo_taste_game.image_recognition.tensor_functions.</code><code class="descname">load_labels</code><span class="sig-paren">(</span><em>label_file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cozmo_taste_game/image_recognition/tensor_functions.html#load_labels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cozmo_taste_game.image_recognition.tensor_functions.load_labels" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="cozmo_taste_game.image_recognition.tensor_functions.read_tensor_from_image_file">
+<code class="descclassname">cozmo_taste_game.image_recognition.tensor_functions.</code><code class="descname">read_tensor_from_image_file</code><span class="sig-paren">(</span><em>file_name</em>, <em>input_height=299</em>, <em>input_width=299</em>, <em>input_mean=0</em>, <em>input_std=255</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cozmo_taste_game/image_recognition/tensor_functions.html#read_tensor_from_image_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cozmo_taste_game.image_recognition.tensor_functions.read_tensor_from_image_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cozmo_taste_game.plate.html" class="btn btn-neutral float-right" title="cozmo_taste_game.plate package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="cozmo_taste_game.food.html" class="btn btn-neutral" title="cozmo_taste_game.food package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, The Cozmopolitans.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

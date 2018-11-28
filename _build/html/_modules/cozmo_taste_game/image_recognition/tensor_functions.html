@@ -1,0 +1,377 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>cozmo_taste_game.image_recognition.tensor_functions &mdash; Cozmo Build a Plate Game 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="Cozmo Build a Plate Game 1.0.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Cozmo Build a Plate Game
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pages/setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pages/basic_program_flow.html">Basic Program Flow</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../cozmo_taste_game/cozmo_taste_game.html">cozmo_taste_game package</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Diagrams</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pages/class_diagrams.html">Class Diagrams</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Image Recognition</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pages/how_to_train.html">How to Train Cozmo to Recognize a New Food</a></li>
+</ul>
+<p class="caption"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pages/documentation.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pages/credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Cozmo Build a Plate Game</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>cozmo_taste_game.image_recognition.tensor_functions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for cozmo_taste_game.image_recognition.tensor_functions</h1><div class="highlight"><pre>
+<span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">This file contains code that runs tensorflow. Most of it should only be changed if the model type is switched,</span>
+<span class="sd">or you know what you are doing.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">globals</span> <span class="k">import</span> <span class="n">resource_dir</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;TF_CPP_MIN_LOG_LEVEL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;3&#39;</span>
+
+
+
+<div class="viewcode-block" id="load_graph"><a class="viewcode-back" href="../../../cozmo_taste_game/cozmo_taste_game.image_recognition.html#cozmo_taste_game.image_recognition.tensor_functions.load_graph">[docs]</a><span class="k">def</span> <span class="nf">load_graph</span><span class="p">(</span><span class="n">model_file</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">graph</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+    <span class="n">graph_def</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">GraphDef</span><span class="p">()</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">model_file</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">graph_def</span><span class="o">.</span><span class="n">ParseFromString</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+    <span class="k">with</span> <span class="n">graph</span><span class="o">.</span><span class="n">as_default</span><span class="p">():</span>
+        <span class="n">tf</span><span class="o">.</span><span class="n">import_graph_def</span><span class="p">(</span><span class="n">graph_def</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">graph</span></div>
+
+
+<div class="viewcode-block" id="read_tensor_from_image_file"><a class="viewcode-back" href="../../../cozmo_taste_game/cozmo_taste_game.image_recognition.html#cozmo_taste_game.image_recognition.tensor_functions.read_tensor_from_image_file">[docs]</a><span class="k">def</span> <span class="nf">read_tensor_from_image_file</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">input_height</span><span class="o">=</span><span class="mi">299</span><span class="p">,</span> <span class="n">input_width</span><span class="o">=</span><span class="mi">299</span><span class="p">,</span>
+                                <span class="n">input_mean</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">input_std</span><span class="o">=</span><span class="mi">255</span><span class="p">):</span>
+    <span class="n">input_name</span> <span class="o">=</span> <span class="s2">&quot;file_reader&quot;</span>
+    <span class="n">output_name</span> <span class="o">=</span> <span class="s2">&quot;normalized&quot;</span>
+    <span class="n">file_reader</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">input_name</span><span class="p">)</span>
+    <span class="c1"># only supporting .jpeg right now</span>
+    <span class="n">image_reader</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">decode_jpeg</span><span class="p">(</span><span class="n">file_reader</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;jpeg_reader&#39;</span><span class="p">)</span>
+    <span class="n">float_caster</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">image_reader</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">dims_expander</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">float_caster</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">resized</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">resize_bilinear</span><span class="p">(</span><span class="n">dims_expander</span><span class="p">,</span> <span class="p">[</span><span class="n">input_height</span><span class="p">,</span> <span class="n">input_width</span><span class="p">])</span>
+    <span class="n">normalized</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">resized</span><span class="p">,</span> <span class="p">[</span><span class="n">input_mean</span><span class="p">]),</span> <span class="p">[</span><span class="n">input_std</span><span class="p">])</span>
+    <span class="n">sess</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">normalized</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="load_labels"><a class="viewcode-back" href="../../../cozmo_taste_game/cozmo_taste_game.image_recognition.html#cozmo_taste_game.image_recognition.tensor_functions.load_labels">[docs]</a><span class="k">def</span> <span class="nf">load_labels</span><span class="p">(</span><span class="n">label_file</span><span class="p">):</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">proto_as_ascii_lines</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">gfile</span><span class="o">.</span><span class="n">GFile</span><span class="p">(</span><span class="n">label_file</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">proto_as_ascii_lines</span><span class="p">:</span>
+        <span class="n">label</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">label</span></div>
+
+
+
+<div class="viewcode-block" id="analyze_photo"><a class="viewcode-back" href="../../../cozmo_taste_game/cozmo_taste_game.image_recognition.html#cozmo_taste_game.image_recognition.tensor_functions.analyze_photo">[docs]</a><span class="k">def</span> <span class="nf">analyze_photo</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analyzes a photo, and returns a dict containing predictions and confidence</span>
+
+<span class="sd">    :param filename: the file name of the photo to be analyzed</span>
+<span class="sd">    :return: a dictionary with the form {&#39;name_of_food_1&#39; : confidence, ..., &#39;name_of_food_5 : confidence}</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">global</span> <span class="n">graph</span><span class="p">,</span> <span class="n">model_file</span><span class="p">,</span> <span class="n">label_file</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Looking good so far&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+    <span class="n">input_filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+    <span class="n">input_height</span> <span class="o">=</span> <span class="mi">224</span>
+    <span class="n">input_width</span> <span class="o">=</span> <span class="mi">224</span>
+    <span class="n">input_mean</span> <span class="o">=</span> <span class="mi">128</span>
+    <span class="n">input_std</span> <span class="o">=</span> <span class="mi">128</span>
+
+    <span class="n">t</span> <span class="o">=</span> <span class="n">read_tensor_from_image_file</span><span class="p">(</span><span class="n">input_filepath</span><span class="p">,</span>
+                                    <span class="n">input_height</span><span class="o">=</span><span class="n">input_height</span><span class="p">,</span>
+                                    <span class="n">input_width</span><span class="o">=</span><span class="n">input_width</span><span class="p">,</span>
+                                    <span class="n">input_mean</span><span class="o">=</span><span class="n">input_mean</span><span class="p">,</span>
+                                    <span class="n">input_std</span><span class="o">=</span><span class="n">input_std</span><span class="p">)</span>
+
+    <span class="n">input_layer</span> <span class="o">=</span> <span class="s2">&quot;input&quot;</span>
+    <span class="n">output_layer</span> <span class="o">=</span> <span class="s2">&quot;final_result&quot;</span>
+    <span class="n">input_name</span> <span class="o">=</span> <span class="s2">&quot;import/&quot;</span> <span class="o">+</span> <span class="n">input_layer</span>
+    <span class="n">output_name</span> <span class="o">=</span> <span class="s2">&quot;import/&quot;</span> <span class="o">+</span> <span class="n">output_layer</span>
+    <span class="n">input_operation</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">get_operation_by_name</span><span class="p">(</span><span class="n">input_name</span><span class="p">)</span>
+    <span class="n">output_operation</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">get_operation_by_name</span><span class="p">(</span><span class="n">output_name</span><span class="p">)</span>
+
+
+
+
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">graph</span><span class="p">)</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">output_operation</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                           <span class="p">{</span><span class="n">input_operation</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">t</span><span class="p">})</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+    <span class="n">top_k</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[</span><span class="o">-</span><span class="mi">5</span><span class="p">:][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">load_labels</span><span class="p">(</span><span class="n">label_file</span><span class="p">)</span>
+
+    <span class="n">seconds</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Evaluation time (1-image): </span><span class="si">{:.3f}</span><span class="s1">s</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
+
+    <span class="n">resp</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;seconds&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">seconds</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">top_k</span><span class="p">:</span>
+        <span class="c1"># print(labels[i], results[i])</span>
+        <span class="n">answer</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;answer&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">answer</span>
+
+    <span class="c1"># os.remove(input_filepath)</span>
+
+    <span class="k">return</span> <span class="n">answer</span></div>
+
+
+<div class="viewcode-block" id="allowed_file"><a class="viewcode-back" href="../../../cozmo_taste_game/cozmo_taste_game.image_recognition.html#cozmo_taste_game.image_recognition.tensor_functions.allowed_file">[docs]</a><span class="k">def</span> <span class="nf">allowed_file</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Checks to see if the filename supplied is in ALLOWED_EXTENTIONS</span>
+
+<span class="sd">    :param filename: a file name to be checked</span>
+<span class="sd">    :return: True if the filename is valid, False otherwise</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">return</span> <span class="s1">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">filename</span> <span class="ow">and</span> \
+           <span class="n">filename</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">ALLOWED_EXTENSIONS</span></div>
+
+
+<span class="c1"># Load the model and graph</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">resource_dir</span><span class="p">)</span>
+<span class="n">model_file</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;</span><span class="si">{resource_dir}</span><span class="s2">/output_graph.pb&quot;</span>
+<span class="n">label_file</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;</span><span class="si">{resource_dir}</span><span class="s2">/output_labels.txt&quot;</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">load_graph</span><span class="p">(</span><span class="n">model_file</span><span class="p">)</span>
+
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, The Cozmopolitans.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

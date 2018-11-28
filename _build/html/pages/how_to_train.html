@@ -1,0 +1,360 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Train Cozmo to Recognize a New Food &mdash; Cozmo Build a Plate Game 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Cozmo Build a Plate Game 1.0.0 documentation" href="../index.html"/>
+        <link rel="next" title="Documentation" href="documentation.html"/>
+        <link rel="prev" title="Class Diagrams" href="class_diagrams.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cozmo Build a Plate Game
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_program_flow.html">Basic Program Flow</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../cozmo_taste_game/cozmo_taste_game.html">cozmo_taste_game package</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Diagrams</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="class_diagrams.html">Class Diagrams</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Image Recognition</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How to Train Cozmo to Recognize a New Food</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#take-images-with-cozmo">1. Take images with Cozmo:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-the-training-script">2. Run the training script:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-and-possibly-repeat-all-3-steps">3. Test (and possibly repeat all 3 steps):</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#neural-network-troubleshooting">Neural Network Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cozmo Build a Plate Game</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>How to Train Cozmo to Recognize a New Food</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/pages/how_to_train.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-train-cozmo-to-recognize-a-new-food">
+<h1>How to Train Cozmo to Recognize a New Food<a class="headerlink" href="#how-to-train-cozmo-to-recognize-a-new-food" title="Permalink to this headline">¶</a></h1>
+<p><strong>All the python scripts used in this section are located in the cozmo_taste_game/tools folder</strong></p>
+<p>It’s best to have some general knowlege about neural networks and tensorflow when retraining cozmo. Here are some
+resources that may be helpful to read before continuing:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="https://www.tensorflow.org/tutorials/image_retraining/">General information about retraining</a></li>
+<li><a class="reference external" href="https://hackernoon.com/creating-insanely-fast-image-classifiers-with-mobilenet-in-tensorflow-f030ce0a2991/">Information about retrain.py and its arguments</a></li>
+<li><a class="reference external" href="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets/">More information about retraining</a></li>
+</ul>
+</div></blockquote>
+<p>It should also be noted that you should have similar training and real world operating. Ex: if you’re training Cozmo
+and there’s a white background, there should be a white background when the program is running. White is a really
+good color choice since it provides good contrast between the background and the images.</p>
+<p>Cozmo uses a retrained MobileNet neural network to classify images. Training the network has
+3 steps:</p>
+<div class="section" id="take-images-with-cozmo">
+<h2>1. Take images with Cozmo:<a class="headerlink" href="#take-images-with-cozmo" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>To take pictures with cozmo, place him and his testing plate on their respective locations on the mat.
+Execute “take-pictures.py &lt;food_name&gt; &lt;duration&gt;” where duration is how long cozmo will take pictures.
+This command will save .jpg images to pictures/&lt;food_name&gt;/. Once you execute the script rotate the food on
+the plate or rotate cozmo, making sure cozmo sees all the sides he would see during the game.</p>
+<blockquote>
+<div>How you do it doesn’t matter, as long as
+the pictures are clear and cozmo is the correct distance from the food (about the distance between him and the plate during gameplay).
+800 to 1,000 pictures is a good amount of pictures, just be sure that all objects have about the same number of pictures.</div></blockquote>
+<p>After you finish taking the pictures, review them. While reviewing them, remove any pictures that aren’t good quality.
+Some examples are:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Images that have an foreign object in frame (Ex: your hand)</li>
+<li>Images that are blurry</li>
+</ol>
+</div></blockquote>
+<p>The picture taking process takes a lot of experimentation. If the neural network isn’t training well, you can try
+taking pictures with brighter/darker lighting, adding more pictures, or removing pictures that are poor quality.</p>
+</div></blockquote>
+</div>
+<div class="section" id="run-the-training-script">
+<h2>2. Run the training script:<a class="headerlink" href="#run-the-training-script" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>For this next step, you will be running a script that trains the neural network. The first step is to copy the folders
+in “pictures” to the “data” folder. Then, open a console that is in the image recognition folder
+( Shift+Right click then click open command window here in Windows). Run the command:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python retrain.py --image_dir<span class="o">=</span>./data --how_many_training_steps<span class="o">=</span><span class="m">1000</span>  --validation_batch_size<span class="o">=</span>-1 --train_batch_
+<span class="nv">size</span><span class="o">=</span><span class="m">32</span> --validation_percentage<span class="o">=</span><span class="m">20</span> --testing_percentage<span class="o">=</span><span class="m">20</span> --learning_rate<span class="o">=</span>.01 --architecture mobilenet_1.0_224
+</pre></div>
+</div>
+</div></blockquote>
+<p>This command will begin training the network.</p>
+<blockquote>
+<div><strong>Note:</strong> <em>Typing retrain.py --help  will give you some information about the arguments that are supplied</em></div></blockquote>
+<dl class="docutils">
+<dt>Once the training is complete, there will be 2 files in ./output:</dt>
+<dd><ol class="first last arabic simple">
+<li>output_graph.pb: This is the actual model</li>
+<li>output_labels.txt: This has the names of the foods</li>
+</ol>
+</dd>
+</dl>
+<p>There will also be 3 folders. None of them are important except for retrain_logs, which contains logs that can be used with
+tensorboard (read .</p>
+</div></blockquote>
+</div>
+<div class="section" id="test-and-possibly-repeat-all-3-steps">
+<h2>3. Test (and possibly repeat all 3 steps):<a class="headerlink" href="#test-and-possibly-repeat-all-3-steps" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The final step is to test your neural network. Connect your phone to cozmo and the computer, then position
+Cozmo, the plate, and a food item on the plate. Run the program “Cozmo-takepicture.py”. This program will take a picture
+and save it in the same directory as test.jpg. Then run “mobile-net-test.py” to run “test.jpg” through the network. You can also</p>
+<blockquote>
+<div>supply an argument to test an image with a different name. Ex: “mobile-net-test apple” will run the test on “apple.jpg”.</div></blockquote>
+<p>The program will eventually print out a dictionary with the values <strong>{‘food_name_1’: prediction_confidence, …, ‘food_name_5’: prediction_confidence}</strong>
+These values are the network’s predictions and confidence levels in descending order, where ‘food_name_1’ is the most likely classification,
+and ‘food_name_5’ is the least likely.</p>
+<p>Do this test for all the food props. I recommend taking, and then testing two or more pictures without moving cozmo. This is because Cozmo’s
+camera is very visually noisy, and the noise can impact the results. Getting a bigger sample size gives a better picture of the accuracy.
+It is best to consistently get a correct guess with a confidence of .90 or greater in most positions.</p>
+<p>If your network is performing correctly, then you are finished. You can now replace the model files (<strong>output_graph.pb</strong> and <strong>output_labels.txt</strong>)
+that are in the resource folder with your newly created files. It is wise to keep backups of the old models just in case your new one has
+issues in the future.</p>
+<p>if your network isn’t performing well, read the troubleshooting tips below, and then go back to step 1.</p>
+</div></blockquote>
+</div>
+<div class="section" id="neural-network-troubleshooting">
+<h2>Neural Network Troubleshooting<a class="headerlink" href="#neural-network-troubleshooting" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Here are some tips to improve your neural networks accuracy:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Don’t use similar looking props (ex: a lemon and a lime). Since Cozmo can’t see color, his
+camera isn’t good, telling the difference between similar props is nearly impossible.</li>
+<li>If one food prop is giving you trouble, sometimes deleting, and then retaking all of its images is better than
+just adding new images.</li>
+<li>If you notice you have a high training accuracy but low validation accuracy, this usually means you don’t have
+enough images or that your images don’t have enough variance.</li>
+</ol>
+</div></blockquote>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="documentation.html" class="btn btn-neutral float-right" title="Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="class_diagrams.html" class="btn btn-neutral" title="Class Diagrams" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, The Cozmopolitans.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
