@@ -24,7 +24,7 @@ and how it is played, please click the following button to download the user's g
 
 :download:`Download the User's Guide <_static/UserGuide.pdf>`
 
-Please review the Setup page under Getting Started for instructions on how to get
+review the Setup page under Getting Started for instructions on how to get
 setup to start developing the Cozmo Build a Plate Game project.
 
 For a high level overview of how the various packages are used throughout the code see Class Diagrams
