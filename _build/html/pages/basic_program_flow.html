@@ -181,30 +181,18 @@
             
   <div class="section" id="basic-program-flow">
 <h1>Basic Program Flow<a class="headerlink" href="#basic-program-flow" title="Permalink to this headline">¶</a></h1>
-<p>The program has 3 parts: image capture, the game loop, and the food analyzer.</p>
+<p>Connect Cozmo and RFID readers to computer that has proper software installed. After making sure all connected devices are attached, launch software on the computer, prepare to begin scanning food items.</p>
 <div class="section" id="image-capture">
 <h2>Image Capture<a class="headerlink" href="#image-capture" title="Permalink to this headline">¶</a></h2>
-<p>When the program first starts, it ties cozmo’s camera event
-to the on_new_camera_image() function, which is then called asynchronously by the Cozmo api.
-Every time cozmo has a new image in its buffer. The program then saves the image to disk
-and stores its location in the global variable ‘photo_location’. Another image will not be taken until the game loop has
-consumed the image and sets ‘photo_location’ to None.</p>
+<p>We are using a RFID reader in order to capture the “Image” of the food being placed on the plate. Each food item is assigned a specific RFID code used to indicate the taste and the name of the food item to be later used while the program is running.</p>
 </div>
 <div class="section" id="game-loop">
 <h2>Game Loop<a class="headerlink" href="#game-loop" title="Permalink to this headline">¶</a></h2>
-<p>The game loop is very simple. The game loop checks to see if ‘photo_location’ isn’t None. If it is, the program
-forwards ‘photo_location’ to the food analyzer, which is where all of the tensorflow image recognition is done.
-After the program is done analyzing the photo, it checks to see if a valid food was found. If there is a valid food,
-the game performs an action with the food, which in our case is trying to add it to the plate.</p>
+<p>The game is played through once automatically after checking whether the RFID reader is active. After a full run through of the game, the user is prompted on whether or not they want to play the game again or they would like to quit.</p>
 </div>
 <div class="section" id="food-analyzer">
 <h2>Food Analyzer<a class="headerlink" href="#food-analyzer" title="Permalink to this headline">¶</a></h2>
-<p>The food analyzer is where all the filtering is done for image recognition. Sometimes when Cozmo see’s an image, there may
-be a false positive. This is why inside the food analyzer, when it thinks it sees something, it will keep track of previous
-foods and will only say that it has found food when it is fully confident.</p>
-<p>One implementation could be to only be confident
-when the analyze_photo function has a max confidence above .6 3 times in a row. This is conservative, but it will filter
-out any potential false positives.</p>
+<p>RFID reader scans a tagtakes each fruit tag and compares it with a stored value to determine which fruit has been chosen. Once a full plate has been made from the different food groups the “Plate” is cleared and ready to accept food again.</p>
 <p><strong>References</strong></p>
 <p><a class="reference internal" href="../cozmo_taste_game/cozmo_taste_game.image_recognition.html#module-cozmo_taste_game.image_recognition.response_analyzer" title="cozmo_taste_game.image_recognition.response_analyzer"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cozmo_taste_game.image_recognition.response_analyzer</span></code></a></p>
 </div>

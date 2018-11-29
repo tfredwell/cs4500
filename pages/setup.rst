@@ -1,13 +1,13 @@
 Setup
 =====
 
-1. Follow the instructions on https://www.python.org/downloads/ to download and install python 3.6.
+1. Follow the instructions on https://www.python.org/downloads/ to download and install python 3.7.
 
 2. Clone the repository onto your local machine.
 
 .. code-block:: bash
 
-   git clone https://github.com/Msherman4231/CozmoTasteProject.git
+   git clone https://github.com/tfredwell/cs4500.git
 
 3. Navigate to the repository.
 
@@ -15,18 +15,18 @@ Setup
 
    cd CozmoTasteProject
 
-4. Create a python3.6 virtual environment. See `the official python tutorial
+4. Create a python3.7 virtual environment. See `the official python tutorial
    <https://docs.python.org/3/tutorial/venv.html>`_ for more information.
 
 .. code-block:: bash
 
-   python3.6 -m virtualenv venv
+   python3.7 -m venv virtualenv venv
 
 5. Activate the virtual environment.
 
 .. code-block:: bash
 
-   source venv/bin/activate
+   source virtualenv/bin/activate
 
 6. Install dependencies.
 
@@ -42,10 +42,10 @@ Setup
 
 .. code-block:: bash
 
-   python3.6 main.py
+   python3.7 main.py
 
 10. Or skip steps 7-9 and use the -g flag to run a simulation of the program without Cozmo.
 
 .. code-block:: bash
 
-   python3.6 main.py -g
+   python3.7 main.py -g
