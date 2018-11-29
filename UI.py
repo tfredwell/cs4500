@@ -1,10 +1,19 @@
 import wx
+import threading
+import cozmo
+import os
+import shutil
+from sys import argv
+from time import sleep
+from random import choice
+import serial.tools.list_ports
+from cozmo_taste_game import FakeRobot, CozmoRobot
 
 # Application, frame, and frame are declared
 app = wx.App(False)
 frame = wx.Frame(None, title="Cozmo Taste Game", size = (10000, 10000))
 panel = wx.Panel(frame)
-
+global robot
 # Event method to draw the the game UI
 def on_paint(event):
     dc = wx.PaintDC(event.GetEventObject())
@@ -32,7 +41,42 @@ def on_paint(event):
     img.SetHeight(1000)
     dc.DrawBitmap(img, 100, 300) # Display the image to the screen
 
+def printTag(tagNumber):
+    global robot
+    if robot is not None:
+        msg = f'I see tag {tagNumber}'
+        print(f'Cozmo Says {msg}')
+
+        robot.speak(msg)
+    else:
+        print('cozmo not here')
+        print(tagNumber)
+    print('done')
+
+tagBuffer = []
+def on_key(event):
+    global tagBuffer
+    keycode = event.GetKeyCode()
+    tagBuffer.append(chr(keycode))
+    if len(tagBuffer) == 10:
+        printTag(''.join(tagBuffer))
+        tagBuffer = []
+
+
 # Draw the interface and display it on the screen
 panel.Bind(wx.EVT_PAINT, on_paint)
-frame.Show(True)
-app.MainLoop()
+panel.Bind(wx.EVT_KEY_DOWN, on_key)
+
+
+
+def new_cozmo_pgm(czmo):
+    frame.Show(True)
+    global robot
+    rbt =  CozmoRobot(czmo)
+    robot = rbt
+    app.MainLoop()
+    print('exiting')
+
+print('hi')
+cozmo.run_program(new_cozmo_pgm)
+

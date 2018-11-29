@@ -120,7 +120,7 @@ def new_cozmo_pgm(robot):
 
     reader = RfidReader(eventHandler)
     reader.connect()
-    while tag is None and tag is not "659994020111":
+    while tag is None or tag is not "659994020111":
         tag = reader.readTag()
         print(tag)
         if tag is not None:
@@ -132,6 +132,7 @@ def new_cozmo_pgm(robot):
 #     cozmo_program()
 # else:
 print('hi')
-cozmo.run_program(new_cozmo_pgm, use_viewer=True, force_viewer_on_top=True)
+new_cozmo_pgm(FakeRobot())
+#cozmo.run_program(new_cozmo_pgm, use_viewer=True, force_viewer_on_top=True)
 
 
