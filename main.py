@@ -123,14 +123,16 @@ def new_cozmo_pgm(robot):
     reader = RfidReader(eventHandler)
     reader.connect()
     key = Dictionary()
-    flag = 0
-    while flag == 0: #we need know how this ends
+    flag = "y"
+    while flag == "y": #we want to clean-up how this ends
         group = key.randomfood()
-        robot.speak(f'Can I get a {group[1]}')
-        while tag is None or tag is not "659994020111":
+        robot.speak(f'I am hungry')
+        robot.speak(f'Can I get something from the {group[1]} food group')
+        tag = None
+        fulltag = []
+        while tag is None:
             tag = reader.readTag()
-            fulltag = []
-            for item in key[0]:
+            for item in group[0]:
                 if item[0] == tag:
                     for obj in item:
                         fulltag.append(obj)
@@ -147,7 +149,7 @@ def new_cozmo_pgm(robot):
 
             pass
         print('exiting')
-        flag = input("enter a 0 to continue")
+        flag = input("would you like to continue? (enter y for yes")
 
 # if DEBUG_MODE:
 #     cozmo_program()
