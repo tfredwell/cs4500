@@ -137,20 +137,20 @@ def new_cozmo_pgm(robot):
                     for obj in item:
                         fulltag.append(obj)
 
-            print(fulltag)
-
             if tag is not None:
                 if not fulltag:
+                    print(tag)
                     robot.speak(f'That was not a {group[1]}')
                     robot.play_anim_trigger(Triggers.MajorFail).wait_for_completed()
                 else:
+                    print(fulltag)
                     robot.speak(f'I see tag {fulltag[1]}')
                     robot.speak(f'This tastes {fulltag[2]}')
                     robot.play_anim_trigger(Triggers.CodeLabHappy).wait_for_completed()
 
             pass
         print('exiting')
-        flag = input("would you like to continue? (enter y for yes")
+        flag = input("would you like to continue? (enter y for yes)")
 
 # if DEBUG_MODE:
 #     cozmo_program()
