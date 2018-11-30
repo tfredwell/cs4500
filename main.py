@@ -139,13 +139,14 @@ def new_cozmo_pgm(robot):
 
             print(fulltag)
 
-            if not fulltag:
-                robot.speak(f'That was not a {group[1]}')
-                robot.play_anim_trigger( Triggers.MajorFail).wait_for_completed()
-            elif tag is not None:
-                robot.speak(f'I see tag {fulltag[1]}')
-                robot.speak(f'This tastes {fulltag[2]}')
-                robot.play_anim_trigger(Triggers.CodeLabHappy).wait_for_completed()
+            if tag is not None:
+                if not fulltag:
+                    robot.speak(f'That was not a {group[1]}')
+                    robot.play_anim_trigger(Triggers.MajorFail).wait_for_completed()
+                else:
+                    robot.speak(f'I see tag {fulltag[1]}')
+                    robot.speak(f'This tastes {fulltag[2]}')
+                    robot.play_anim_trigger(Triggers.CodeLabHappy).wait_for_completed()
 
             pass
         print('exiting')

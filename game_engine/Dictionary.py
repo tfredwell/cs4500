@@ -16,6 +16,8 @@ import random
 #               displays what is in each food type list and numbers the entries of each list in sequential order
 #           clear(self):
 #                clears all *table.txt files
+#           randomfood(self):
+#               randomizes to pick one food group list and returns [foodlist, foodname]
 #           getveg(self)|getprotein(self)|getfruit(self)|getgrain(self)|getdairy(self):
 #               returns the respective food item list
 # needed/contained files:
