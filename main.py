@@ -132,12 +132,12 @@ def new_cozmo_pgm(robot):
         fulltag = []
         while tag is None:
             tag = reader.readTag()
-            for item in group[0]:
-                if item[0] == tag:
-                    for obj in item:
-                        fulltag.append(obj)
-
             if tag is not None:
+                for item in group[0]:
+                    if item[0] == tag:
+                        for obj in item:
+                            fulltag.append(obj)
+
                 if not fulltag:
                     print(tag)
                     robot.speak(f'That was not a {group[1]}')
