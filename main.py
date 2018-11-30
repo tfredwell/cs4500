@@ -1,4 +1,6 @@
 import threading
+from cozmo.anim import Triggers
+from game_engine import Dictionary
 import cozmo
 import os
 import shutil
@@ -120,13 +122,32 @@ def new_cozmo_pgm(robot):
 
     reader = RfidReader(eventHandler)
     reader.connect()
-    while tag is None or tag is not "659994020111":
-        tag = reader.readTag()
-        print(tag)
-        if tag is not None:
-            robot.speak(f'I see tag {tag}')
-        pass
-    print('exiting')
+    key = Dictionary()
+    flag = 0
+    while flag == 0: #we need know how this ends
+        group = key.randomfood()
+        robot.speak(f'Can I get a {group[1]}')
+        while tag is None or tag is not "659994020111":
+            tag = reader.readTag()
+            fulltag = []
+            for item in key[0]:
+                if item[0] == tag:
+                    for obj in item:
+                        fulltag.append(obj)
+
+            print(fulltag)
+
+            if not fulltag:
+                robot.speak(f'That was not a {group[1]}')
+                robot.play_anim_trigger( Triggers.MajorFail).wait_for_completed()
+            elif tag is not None:
+                robot.speak(f'I see tag {fulltag[1]}')
+                robot.speak(f'This tastes {fulltag[2]}')
+                robot.play_anim_trigger(Triggers.CodeLabHappy).wait_for_completed()
+
+            pass
+        print('exiting')
+        flag = input("enter a 0 to continue")
 
 # if DEBUG_MODE:
 #     cozmo_program()

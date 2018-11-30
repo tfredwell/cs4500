@@ -1,3 +1,4 @@
+import random
 #   Team Cosmosis
 #   Group Project: taste game remodel
 #   contained class: Dictionary
@@ -139,10 +140,20 @@ class Dictionary:
     def getgrain(self):
         return self.grain
 
+    def randomfood(self):
+        group = random.randint(0, 5)
+        if group == 1:
+            return [self.veg, "vegetable"]
+        if group == 2:
+            return [self.protein, "protein"]
+        if group == 3:
+            return [self.fruit, "fruit"]
+        if group == 4:
+            return [self.dairy, "dairy"]
+        if group == 5:
+            return [self.grain, "grain"]
 
 #   test Code: (just proof of concept)
-test = Dictionary()
-test.display()
 #   veg = test.getveg()
 #   dairy = test.getdairy()
 #   protein = test.getprotein()
