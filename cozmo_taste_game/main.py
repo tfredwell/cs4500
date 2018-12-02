@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from optparse import OptionParser
+from time import sleep
 from typing import List
 
 from cozmo_taste_game import *
@@ -58,4 +59,5 @@ def main():
 
 
 main()
-input('press any key to exit....')
+while True:
+    sleep(500)
