@@ -4,7 +4,7 @@ from cozmo_taste_game.rfid import Reader
 
 
 class RfidReader(Reader):
-    def __init__(self):
+    def __init__(self, loop):
         self.tag_read_callback = None
         t = Thread(target=self.__take_tag)
         t.daemon = True

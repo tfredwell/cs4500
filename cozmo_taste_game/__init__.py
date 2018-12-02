@@ -2,5 +2,5 @@
 
 from .food import FoodProp, get_food, FoodItem
 from .rfid import Reader, FakeReader, RfidReader
-from .robot import Robot, FakeRobot, CozmoRobot
+from .robot import FakeCozmo, RealTasterBot
 from .plate import ColorfulPlate

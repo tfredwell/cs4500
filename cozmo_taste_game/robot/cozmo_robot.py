@@ -1,153 +1,90 @@
-from .robot import Robot
-from cozmo.util import degrees
-from cozmo.world import EvtNewCameraImage
-from random import randint, getrandbits
-from cozmo.anim import Triggers
+from asyncio import sleep
+from random import choice
+
+import cozmo
+from cozmo.robot import Robot
+
+from cozmo_taste_game.food.food_group import FoodGroup
+from cozmo_taste_game.robot import EvtWrongFood, EvtTagRead, EvtStartNewGame, EvtCorrectFood,EvtTagFound, EvtUnknownTag
 
 
-class CozmoRobot(Robot):
-    """Wrapper class for a :class:`cozmo.robot.Robot`"""
-
-    # def __init__(self, cozmo):
-    #     self.cozmo = cozmo
-    #     self.current_angle = 0
-
-    def __init__(self, ):
+class RealTasterBot:
+    def __init__(self, items):
         self.cozmo = None
-        self.current_angle = 0
+        self.world = None
+        self.items = dict((item.tag, item) for item in items)
+        self.ready = False
 
-    def add_event_handler(self, on_new_camera_image) -> None:
-        self.cozmo.add_event_handler(EvtNewCameraImage, on_new_camera_image)
+    async def run(self, connection):
+        try:
+            self.cozmo = await connection.wait_for_robot()
+            self.world = self.cozmo.world
+            action = self.cozmo.say_text('hello')
+            await action.wait_for_completed()
+            await self.start()
 
-    def set_start_position(self) -> None:
-        """Sets the start position.
+            while True:
+                await sleep(0.1)
+        except KeyboardInterrupt:
+            print("Exited.")
 
-        :return: None
-        """
-        self.cozmo.set_head_angle(degrees(0)).wait_for_completed()
-        self.cozmo.set_lift_height(0.0).wait_for_completed()
+    async def send_tag(self, tag):
+        await self.world.dispatch_event(EvtTagRead, tag=tag)
 
-    def speak(self, text: str) -> None:
-        """Wrapper method for :meth:`~cozmo.robot.Robot.say_text`.
+    async def async_send_tag(self, tag):
+        await self.world.dispatch_event(EvtTagRead, tag=tag)
 
-        :param text: The text to say
-        :return: None
-        """
-        self.cozmo.say_text(str(text)).wait_for_completed()
+    async def start(self):
+        self.world.add_event_handler(EvtTagRead, self.__tag_read)
+        self.world.add_event_handler(EvtStartNewGame, self.__start_new_game)
+        self.world.add_event_handler(EvtUnknownTag, self.__unknown_tag)
+        self.world.add_event_handler(EvtTagFound, self.__tag_found)
+        self.world.add_event_handler(EvtWrongFood, self.__wrong_food)
+        self.world.add_event_handler(EvtCorrectFood, self.__correct_food)
+        next_food_group = choice(list(FoodGroup))
+        await self.world.dispatch_event(EvtStartNewGame, food_group=next_food_group)
 
-    def turn_in_place(self) -> None:
-        """Wrapper method for :meth:`~cozmo.robot.Robot.turn_in_place`.
+    async def __start_new_game(self, evt: EvtStartNewGame, **kw) -> None:
+        cozmo.logger.info(f'recv event {evt}')
+        self.food_group = evt.food_group
+        action = self.cozmo.say_text(f'I am hungry for some {self.food_group.name}')
+        await action.wait_for_completed()
+        self.ready = True
 
-        :return: None
-        """
-        rotation_amount = self.__get_rotation_amount()
-        self.current_angle += rotation_amount
-        self.cozmo.turn_in_place(degrees(rotation_amount)).wait_for_completed()
+    async def __unknown_tag(self, evt: EvtUnknownTag, **kw) -> None:
+        cozmo.logger.info(f'recv event {evt}')
+        action = self.cozmo.say_text('Hmm, I do not know what that is!')
+        await action.wait_for_completed()
+        self.ready = True
 
-    def __get_rotation_amount(self) -> int:
-        """Gets an amount to rotate.
-
-        :return: The amount to rotate
-        """
-        min_rotate_angle = -10
-        max_rotate_angle = 10
-
-        if self.current_angle <= min_rotate_angle:
-            rotation_amount = 5 + randint(0, 7)
-
-        elif self.current_angle >= max_rotate_angle:
-            rotation_amount = -5 - randint(0, 7)
-
+    async def __tag_found(self, evt: EvtTagFound, **kw) -> None:
+        cozmo.logger.info(f'recv event {evt}')
+        if self.food_group == evt.food_item.food_group:
+            await self.world.dispatch_event(EvtCorrectFood, food_item=evt.food_item)
         else:
-            rotation_amount = 5 if getrandbits(1) == 0 else -5
+            await self.world.dispatch_event(EvtWrongFood, food_item=evt.food_item, expected_food_group=self.food_group)
 
-            if rotation_amount < 0:
-                rotation_amount -= randint(0, 7)
+    async def __wrong_food(self, evt: EvtWrongFood, **kw) -> None:
+        cozmo.logger.info(f'recv event {evt}')
+        say = self.cozmo.say_text(f'A {evt.food_item.name} is not a {evt.expected_food_group.name}')
+        await say.wait_for_completed()
+        self.ready = True
+
+    async def __correct_food(self, evt: EvtCorrectFood, **kw) -> None:
+        cozmo.logger.info(f'recv event {evt}')
+        next_food_group = choice(list(FoodGroup))
+        msg = f'Yum! The {evt.food_item.food_group.name} {evt.food_item.name} is {evt.food_item.taste}'
+        action = self.cozmo.say_text(msg, play_excited_animation=True)
+        await action.wait_for_completed()
+        await self.world.dispatch_event(EvtStartNewGame, food_group=next_food_group)
+
+    async def __tag_read(self, evt: EvtTagRead, **kw) -> None:
+        cozmo.logger.info(f'recv event {evt}')
+        if self.ready:
+            self.ready = False
+            if evt.tag in self.items:
+                await self.world.dispatch_event(EvtTagFound, food_item=self.items[evt.tag])
             else:
-                rotation_amount += randint(0, 7)
-
-        return rotation_amount
-
-    def react_positively(self) -> None:
-        """Performs a positive reaction. Chooses a random number
-        from 0 to 4 and plays reaction that is tied to that number.
-
-        :return: None
-        """
-        positive_reactions = [
-            Triggers.MajorWin,
-            Triggers.CodeLabHappy,
-            Triggers.CodeLabYes,
-            Triggers.CodeLabAmazed,
-            Triggers.CodeLabCelebrate
-        ]
-
-        num = randint(0, 4)
-        if num == 0:
-            self.speak("That is Perfect!")
-            self.__play_animation(positive_reactions[num])
-        elif num == 1:
-            self.__play_animation(positive_reactions[num])
-            self.speak("Thank you!")
-        elif num == 2:
-            self.__play_animation(Triggers.CodeLabCurious)
-            self.__play_animation(positive_reactions[num])
-        elif num == 3:
-            self.__play_animation(positive_reactions[num])
+                await self.world.dispatch_event(EvtUnknownTag, tag=evt.tag)
         else:
-            self.speak("Yes, you got it!")
-            self.__play_animation(positive_reactions[num])
-
-    def react_negatively(self) -> None:
-        """Performs a negative reaction. Chooses a random number
-        from 0 to 4 and plays reaction that is tied to that number.
-
-        :return: None
-        """
-
-        negative_reactions = [
-            Triggers.MajorFail,
-            Triggers.CubeMovedUpset,
-            Triggers.CodeLabUnhappy,
-            Triggers.PounceFail,
-            Triggers.CodeLabBored
-        ]
-        num = randint(0, 4)
-        if num == 0:
-            self.__play_animation(negative_reactions[num])
-            self.speak("I don't need that")
-        elif num == 1:
-            self.__play_animation(negative_reactions[num])
-            self.speak("Try again please.")
-        elif num == 2:
-            self.__play_animation(Triggers.CodeLabCurious)
-            self.speak("No")
-            self.__play_animation(negative_reactions[num])
-        elif num == 3:
-            self.speak("That's not what I want.")
-            self.__play_animation(negative_reactions[num])
-        else:
-            self.__play_animation(negative_reactions[num])
-
-    def check_plate_and_celebrate(self, distance, speed, deg) -> None:
-        """
-        :param distance: distance to drive in mm
-        :param speed: speed that cozmo will drive
-        :param deg: degrees cozmo will turn
-        :return: None
-        """
-        #
-        self.speak("Congratulations, you filled up the plate!")
-        self.cozmo.turn_in_place(degrees(deg)).wait_for_completed()
-        # self.cozmo.drive_straight(distance_mm(distance), speed_mmps(speed)).wait_for_completed()
-        self.cozmo.play_anim_trigger(Triggers.PopAWheelieInitial, ignore_body_track=True).wait_for_completed()
-        self.cozmo.play_anim_trigger(Triggers.FeedingAteFullEnough_Normal).wait_for_completed()
-        self.cozmo.play_anim_trigger(Triggers.DriveEndHappy).wait_for_completed()
-
-    def __play_animation(self, anim_trigger) -> None:
-        """Wrapper method for :meth:`~cozmo.robot.Robot.play_anim_trigger`.
-
-        :param anim_trigger: The animation to perform
-        :return: None
-        """
-        self.cozmo.play_anim_trigger(anim_trigger, ignore_body_track=True).wait_for_completed()
+            cozmo.logger.info(f'ignoring event {evt}')

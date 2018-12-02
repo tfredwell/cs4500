@@ -1,3 +1,5 @@
-from .robot import Robot
-from .cozmo_robot import CozmoRobot
-from .fake_robot import FakeRobot
+
+from .events import EvtUnknownTag, EvtTagFound, EvtCorrectFood, EvtStartNewGame, EvtTagRead, EvtWrongFood
+from .fake_robot import FakeCozmo
+from .cozmo_robot import RealTasterBot
+

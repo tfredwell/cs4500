@@ -1,32 +1,51 @@
-from time import sleep
-from typing import Optional
-
-from cozmo_taste_game import Robot, Reader, FoodItem
-
-
-class CozmoGame:
-
-    def __init__(self, robot: Robot, reader: Reader, item_list):
-        self.robot = robot
-        self.reader = reader
-        self.item_map = dict((item.tag, item) for item in item_list)
-
-    def play(self) -> None:
-        self.reader.on_tag_read(self.__react_to_tag)
-
-    def __react_to_tag(self, tag: str) -> None:
-        item = self.__find_in_lst(tag)
-        if item is not None:
-            self.robot.speak(f'{item.name} is {item.taste}')
-        else:
-            self.robot.speak('hmmm, i don\'t know what that is!')
-
-    def __find_in_lst(self, tag: str) -> Optional[FoodItem]:
-        if tag in self.item_map:
-            return self.item_map[tag]
-        return None
-
-
+# from time import sleep
+# from typing import Optional
+#
+# from cozmo_taste_game import Robot, Reader, FoodItem
+# from random import choice
+#
+# from cozmo_taste_game.food.food_group import FoodGroup
+#
+#
+# class CozmoGame:
+#     def __init_(self, dispatch_function):
+#         self.dispatcher = dispatch_function
+#
+#
+#
+#
+#
+#     def __init__(self, robot: Robot, reader: Reader, item_list):
+#         self.food_group = None
+#         self.robot = robot
+#         self.reader = reader
+#         self.item_map = dict((item.tag, item) for item in item_list)
+#
+#     def play(self) -> None:
+#         self.reader.on_tag_read(self.__react_to_tag)
+#         self.robot.speak('I am hungry!')
+#         self.food_group = self.__pick_food_group()
+#
+#     def __react_to_tag(self, tag: str) -> None:
+#         item = self.__find_in_lst(tag)
+#         if item is not None:
+#             if item.food_group == self.food_group:
+#                 self.robot.speak(f'{item.name} is {item.taste}')
+#                 self.food_group == self.__pick_food_group()
+#             else:
+#                 self.robot.speak(f'{item.name} is not a {self.food_group}')
+#         else:
+#             self.robot.speak('hmmm, i don\'t know what that is!')
+#
+#     def __find_in_lst(self, tag: str) -> Optional[FoodItem]:
+#         if tag in self.item_map:
+#             return self.item_map[tag]
+#         return None
+#
+#     @staticmethod
+#     def __pick_food_group():
+#         return choice(list(FoodGroup))
+#
 #
 # # Globals
 # DEBUG_MODE = False
