@@ -6,3 +6,4 @@ class FoodGroup(Enum):
     fruit = 1
     vegetable = 2
     grain = 3
+    dairy = 4

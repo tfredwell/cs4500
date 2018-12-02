@@ -8,8 +8,12 @@ from cozmo.anim import Triggers
 class CozmoRobot(Robot):
     """Wrapper class for a :class:`cozmo.robot.Robot`"""
 
-    def __init__(self, cozmo):
-        self.cozmo = cozmo
+    # def __init__(self, cozmo):
+    #     self.cozmo = cozmo
+    #     self.current_angle = 0
+
+    def __init__(self, ):
+        self.cozmo = None
         self.current_angle = 0
 
     def add_event_handler(self, on_new_camera_image) -> None:
@@ -124,7 +128,7 @@ class CozmoRobot(Robot):
             self.__play_animation(negative_reactions[num])
         else:
             self.__play_animation(negative_reactions[num])
-            
+
     def check_plate_and_celebrate(self, distance, speed, deg) -> None:
         """
         :param distance: distance to drive in mm
@@ -147,5 +151,3 @@ class CozmoRobot(Robot):
         :return: None
         """
         self.cozmo.play_anim_trigger(anim_trigger, ignore_body_track=True).wait_for_completed()
-
-
