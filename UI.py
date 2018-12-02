@@ -62,21 +62,46 @@ def on_key(event):
         printTag(''.join(tagBuffer))
         tagBuffer = []
 
-
 # Draw the interface and display it on the screen
 panel.Bind(wx.EVT_PAINT, on_paint)
 panel.Bind(wx.EVT_KEY_DOWN, on_key)
 
-
-
 def new_cozmo_pgm(czmo):
     frame.Show(True)
+
+    # Cozmo status label
+    desc = wx.StaticText(panel, -1, "Cozmo Status", pos = (1050, 430))
+    font = wx.Font(35, wx.DECORATIVE, wx.ITALIC, wx.NORMAL)
+    desc.SetFont(font)
+
+    # Cozmo Status Textbox	
+    status = wx.TextCtrl(panel, style = wx.TE_READONLY, size = (400, 30), pos = (1000, 500) )
+    status.SetBackgroundColour("white")
+    status.SetMaxLength(15)
+    font = wx.Font(12, wx.DECORATIVE, wx.ITALIC, wx.NORMAL)
+    status.SetFont(font)
+    
+    # Botton to restart game
+    btn = wx.Button(panel,-1,"Restart Game", size = (300, 100), pos = (1050, 560))  
+    btn.Bind(wx.EVT_BUTTON, OnClicked)
+
+    # Function that gets cozmos status
+    cozmo_status(status)
+    
     global robot
     rbt =  CozmoRobot(czmo)
     robot = rbt
     app.MainLoop()
+ 
     print('exiting')
 
-print('hi')
+# Starts a new game    
+def OnClicked(event):
+    print ("New Game")
+    cozmo.run_program(new_cozmo_pgm)
+    
+def cozmo_status(status):
+    # Gets status value from cozom
+    status.SetValue("Test")
+    
 cozmo.run_program(new_cozmo_pgm)
-
