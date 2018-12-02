@@ -1,3 +1,4 @@
+import asyncio
 from typing import Callable
 from threading import Thread
 from cozmo_taste_game.rfid import Reader
@@ -6,6 +7,7 @@ from cozmo_taste_game.rfid import Reader
 class RfidReader(Reader):
     def __init__(self, loop):
         self.tag_read_callback = None
+        self.loop = loop
         t = Thread(target=self.__take_tag)
         t.daemon = True
         t.start()
@@ -17,4 +19,4 @@ class RfidReader(Reader):
         while True:
             tag = input()
             if self.tag_read_callback is not None:
-                self.tag_read_callback(tag)
+                asyncio.run_coroutine_threadsafe(self.tag_read_callback(tag), self.loop)

@@ -34,20 +34,21 @@ def create_reader(use_fake: bool, loop, items: List[FoodItem]) -> Reader:
 
 def create_robot(use_fake, loop, items, reader):
     bot = RealTasterBot(items)
+    reader.on_tag_read(bot.send_tag)
     if use_fake:
         fake = FakeCozmo(loop)
         bot.cozmo = fake
         bot.world = fake.world
-        reader.on_tag_read(bot.send_tag)
         asyncio.ensure_future(bot.start())
     else:
+
         class Factory(cozmo.robot.Robot):
             async def run(self, cozmo_connection: object) -> object:
                 await bot.run(cozmo_connection)
 
         cozmo.conn.CozmoConnection.robot_factory = Factory
-        cozmo.connect_on_loop(loop)
-
+        conn = cozmo.connect_on_loop(loop)
+        asyncio.ensure_future(bot.run(conn))
 #
 
 
@@ -62,7 +63,7 @@ def main():
     parser.add_option("-k", "--knownItemFile", dest="known_items_file", metavar="FILE",
                       help="the file where known items are stored",
                       default='items.csv')
-
+    cozmo.setup_basic_logging()
     loop = asyncio.get_event_loop()
     (options, _ignored_) = parser.parse_args()
     item_list = load_items(options.known_items_file)

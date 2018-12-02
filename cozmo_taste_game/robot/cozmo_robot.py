@@ -17,6 +17,7 @@ class RealTasterBot:
 
     async def run(self, connection):
         try:
+            print('got con')
             self.cozmo = await connection.wait_for_robot()
             self.world = self.cozmo.world
             action = self.cozmo.say_text('hello')
