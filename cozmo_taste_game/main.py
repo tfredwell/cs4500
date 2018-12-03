@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 import asyncio
-from asyncio import sleep, run
+from asyncio import get_event_loop
 from optparse import OptionParser
 from typing import List
 
 import cozmo
+from wxasync import WxAsyncApp
 
-from cozmo_taste_game import FoodItem, Reader, FakeReader, RfidReader, RealTasterBot
+from cozmo_taste_game import FoodItem, Reader, FakeReader, RfidReader, RealTasterBot, UserInterface
 from cozmo_taste_game.food.food_group import FoodGroup
 from cozmo_taste_game.robot import FakeCozmo
 
@@ -32,10 +33,12 @@ def create_reader(use_fake: bool, loop, items: List[FoodItem]) -> Reader:
         return FakeReader(loop, list(map(lambda item: item.tag, items)))
     return RfidReader(loop)
 
+
 def create_robot(use_fake, loop, items, reader):
     bot = RealTasterBot(items)
     reader.on_tag_read(bot.send_tag)
     if use_fake:
+
         fake = FakeCozmo(loop)
         bot.cozmo = fake
         bot.world = fake.world
@@ -49,11 +52,12 @@ def create_robot(use_fake, loop, items, reader):
         cozmo.conn.CozmoConnection.robot_factory = Factory
         conn = cozmo.connect_on_loop(loop)
         asyncio.ensure_future(bot.run(conn))
+
+
 #
 
 
 def main():
-
     usage = "usage: %prog [options]"
     parser = OptionParser(usage=usage)
     parser.add_option("-b", "--fakeRobot", action="store_true", dest="fake_robot",
@@ -63,17 +67,25 @@ def main():
     parser.add_option("-k", "--knownItemFile", dest="known_items_file", metavar="FILE",
                       help="the file where known items are stored",
                       default='items.csv')
-    cozmo.setup_basic_logging()
-    loop = asyncio.get_event_loop()
+    parser.add_option("-n", "--disableUI", action="store_true", dest="disable_ui",
+                      help="disable the graphical interface")
+
     (options, _ignored_) = parser.parse_args()
+    loop = asyncio.get_event_loop()
+    cozmo.setup_basic_logging()
     item_list = load_items(options.known_items_file)
     reader = create_reader(options.fake_reader, loop, item_list)
-    robot = create_robot(options.fake_robot, loop, item_list, reader)
-    loop.run_forever()
-    # (options, _ignored_) = parser.parse_args()
-    # item_list = load_items(options.known_items_file)
-    # reader = create_reader(options.fake_reader, item_list)
-    # await create_robot(options.fake_robot, item_list, reader)
+
+    if options.disable_ui:
+        create_robot(options.fake_robot, loop, item_list, reader)
+        loop.run_forever()
+    else:
+        app = WxAsyncApp()
+        frame = UserInterface()
+        frame.Show()
+        app.SetTopWindow(frame)
+        create_robot(options.fake_robot, loop, item_list, reader)
+        loop.run_until_complete(app.MainLoop())
 
 
 main()

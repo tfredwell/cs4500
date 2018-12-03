@@ -36,6 +36,7 @@ class RealTasterBot:
         await self.world.dispatch_event(EvtTagRead, tag=tag)
 
     async def start(self):
+        print('s')
         self.world.add_event_handler(EvtTagRead, self.__tag_read)
         self.world.add_event_handler(EvtStartNewGame, self.__start_new_game)
         self.world.add_event_handler(EvtUnknownTag, self.__unknown_tag)

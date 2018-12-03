@@ -3,4 +3,5 @@
 from .food import FoodGroup, FoodItem
 from .rfid import Reader, FakeReader, RfidReader
 from .robot import FakeCozmo, RealTasterBot
+from.user_interface import UserInterface
 
