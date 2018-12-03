@@ -54,9 +54,6 @@ def create_robot(use_fake, loop, items, reader):
         asyncio.ensure_future(bot.run(conn))
 
 
-#
-
-
 def main():
     usage = "usage: %prog [options]"
     parser = OptionParser(usage=usage)
@@ -74,17 +71,19 @@ def main():
     loop = asyncio.get_event_loop()
     cozmo.setup_basic_logging()
     item_list = load_items(options.known_items_file)
-    reader = create_reader(options.fake_reader, loop, item_list)
+
 
     if options.disable_ui:
+        reader = create_reader(options.fake_reader, loop, item_list)
         create_robot(options.fake_robot, loop, item_list, reader)
         loop.run_forever()
     else:
         app = WxAsyncApp()
         frame = UserInterface()
+
         frame.Show()
         app.SetTopWindow(frame)
-        create_robot(options.fake_robot, loop, item_list, reader)
+        create_robot(options.fake_robot, loop, item_list, frame)
         loop.run_until_complete(app.MainLoop())
 
 

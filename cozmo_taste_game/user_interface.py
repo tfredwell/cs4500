@@ -1,24 +1,35 @@
+from typing import Callable
+
 import wx
 from wxasync import AsyncBind, WxAsyncApp, StartCoroutine
 import asyncio
-from asyncio.events import get_event_loop
 import time
 
 class UserInterface(wx.Frame):
+
     def __init__(self, parent=None):
         super(UserInterface, self).__init__(parent)
+        self.tag_callback = None
         vbox = wx.BoxSizer(wx.VERTICAL)
-        button1 =  wx.Button(self, label="Submit")
-        self.edit =  wx.StaticText(self, style=wx.ALIGN_CENTRE_HORIZONTAL|wx.ST_NO_AUTORESIZE)
-        self.edit_timer =  wx.StaticText(self, style=wx.ALIGN_CENTRE_HORIZONTAL|wx.ST_NO_AUTORESIZE)
-        vbox.Add(button1, 2, wx.EXPAND|wx.ALL)
-        vbox.AddStretchSpacer(1)
-        vbox.Add(self.edit, 1, wx.EXPAND|wx.ALL)
-        vbox.Add(self.edit_timer, 1, wx.EXPAND|wx.ALL)
+
+        self.tag_text_ctrl = wx.TextCtrl(self)
+        AsyncBind(wx.EVT_TEXT_ENTER, self.txt_ctrl_date_entered, self.tag_text_ctrl)
+        vbox.Add(self.tag_text_ctrl)
+        self.last_read_tag = wx.StaticText(self, style=wx.ALIGN_CENTRE_HORIZONTAL | wx.ST_NO_AUTORESIZE)
+        vbox.Add(self.last_read_tag, 1, wx.EXPAND | wx.ALL)
+        #
+        # button1 =  wx.Button(self, label="Submit")
+        # self.edit =  wx.StaticText(self, style=wx.ALIGN_CENTRE_HORIZONTAL|wx.ST_NO_AUTORESIZE)
+        # self.edit_timer =  wx.StaticText(self, style=wx.ALIGN_CENTRE_HORIZONTAL|wx.ST_NO_AUTORESIZE)
+        # vbox.Add(button1, 2, wx.EXPAND|wx.ALL)
+        # vbox.AddStretchSpacer(1)
+        # vbox.Add(self.edit, 1, wx.EXPAND|wx.ALL)
+        # vbox.Add(self.edit_timer, 1, wx.EXPAND|wx.ALL)
+
         self.SetSizer(vbox)
         self.Layout()
-        AsyncBind(wx.EVT_BUTTON, self.async_callback, button1)
-        StartCoroutine(self.update_clock, self)
+        # AsyncBind(wx.EVT_BUTTON, self.async_callback, button1)
+        # StartCoroutine(self.update_clock, self)
 
     async def async_callback(self, event):
         self.edit.SetLabel("Button clicked")
@@ -31,6 +42,16 @@ class UserInterface(wx.Frame):
         while True:
             self.edit_timer.SetLabel(time.strftime('%H:%M:%S'))
             await asyncio.sleep(0.5)
+
+    async def txt_ctrl_date_entered(self, event):
+        tag = str(self.tag_text_ctrl.GetValue())
+        self.tag_text_ctrl.Clear()
+        self.last_read_tag.SetLabel(tag)
+        if self.tag_callback:
+            await self.tag_callback(tag)
+
+    def on_tag_read(self, callback: Callable[[str], None]) -> None:
+        self.tag_callback = callback
 
 # class UserInterface:
 #     def __init__(self, coz, loop):
