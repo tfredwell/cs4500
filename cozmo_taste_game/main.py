@@ -37,6 +37,7 @@ def create_reader(use_fake: bool, loop, items: List[FoodItem]) -> Reader:
 def create_robot(use_fake, loop, items, reader):
     bot = RealTasterBot(items)
     reader.on_tag_read(bot.send_tag)
+    reader.on_game_start(bot.start)
     if use_fake:
 
         fake = FakeCozmo(loop)

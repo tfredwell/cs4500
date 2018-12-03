@@ -1,8 +1,8 @@
 from asyncio import sleep
 from random import choice
+from typing import Callable
 
 import cozmo
-from cozmo.robot import Robot
 
 from cozmo_taste_game.food.food_group import FoodGroup
 from cozmo_taste_game.robot import EvtWrongFood, EvtTagRead, EvtStartNewGame, EvtCorrectFood,EvtTagFound, EvtUnknownTag
@@ -20,9 +20,6 @@ class RealTasterBot:
             print('got con')
             self.cozmo = await connection.wait_for_robot()
             self.world = self.cozmo.world
-            action = self.cozmo.say_text('hello')
-            await action.wait_for_completed()
-            await self.start()
 
             while True:
                 await sleep(0.1)
@@ -35,8 +32,7 @@ class RealTasterBot:
     async def async_send_tag(self, tag):
         await self.world.dispatch_event(EvtTagRead, tag=tag)
 
-    async def start(self):
-        print('s')
+    async def start(self) -> FoodGroup:
         self.world.add_event_handler(EvtTagRead, self.__tag_read)
         self.world.add_event_handler(EvtStartNewGame, self.__start_new_game)
         self.world.add_event_handler(EvtUnknownTag, self.__unknown_tag)
@@ -45,6 +41,7 @@ class RealTasterBot:
         self.world.add_event_handler(EvtCorrectFood, self.__correct_food)
         next_food_group = choice(list(FoodGroup))
         await self.world.dispatch_event(EvtStartNewGame, food_group=next_food_group)
+        return next_food_group
 
     async def __start_new_game(self, evt: EvtStartNewGame, **kw) -> None:
         cozmo.logger.info(f'recv event {evt}')
@@ -74,11 +71,9 @@ class RealTasterBot:
 
     async def __correct_food(self, evt: EvtCorrectFood, **kw) -> None:
         cozmo.logger.info(f'recv event {evt}')
-        next_food_group = choice(list(FoodGroup))
         msg = f'Yum! The {evt.food_item.food_group.name} {evt.food_item.name} is {evt.food_item.taste}'
         action = self.cozmo.say_text(msg, play_excited_animation=True)
         await action.wait_for_completed()
-        await self.world.dispatch_event(EvtStartNewGame, food_group=next_food_group)
 
     async def __tag_read(self, evt: EvtTagRead, **kw) -> None:
         cozmo.logger.info(f'recv event {evt}')
