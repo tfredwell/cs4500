@@ -7,7 +7,7 @@ from typing import List
 import cozmo
 from wxasync import WxAsyncApp
 
-from cozmo_taste_game import FoodItem, Reader, FakeReader, RfidReader, RealTasterBot, UserInterface
+from cozmo_taste_game import FoodItem, Reader, FakeReader, RfidReader, RealTasterBot, UserInterface, GameEngine
 from cozmo_taste_game.food.food_group import FoodGroup
 from cozmo_taste_game.robot import FakeCozmo
 
@@ -34,25 +34,18 @@ def create_reader(use_fake: bool, loop, items: List[FoodItem]) -> Reader:
     return RfidReader(loop)
 
 
-def create_robot(use_fake, loop, items, reader):
-    bot = RealTasterBot(items)
-    reader.on_tag_read(bot.send_tag)
-    reader.on_game_start(bot.start)
+def create_robot(use_fake, loop):
+    bot = RealTasterBot()
     if use_fake:
 
         fake = FakeCozmo(loop)
         bot.cozmo = fake
         bot.world = fake.world
-        asyncio.ensure_future(bot.start())
+        # asyncio.ensure_future(bot.start())
     else:
-
-        class Factory(cozmo.robot.Robot):
-            async def run(self, cozmo_connection: object) -> object:
-                await bot.run(cozmo_connection)
-
-        cozmo.conn.CozmoConnection.robot_factory = Factory
         conn = cozmo.connect_on_loop(loop)
         asyncio.ensure_future(bot.run(conn))
+        return bot
 
 
 def main():
@@ -73,18 +66,23 @@ def main():
     cozmo.setup_basic_logging()
     item_list = load_items(options.known_items_file)
 
-
     if options.disable_ui:
         reader = create_reader(options.fake_reader, loop, item_list)
-        create_robot(options.fake_robot, loop, item_list, reader)
+        create_robot(options.fake_robot, loop)
         loop.run_forever()
     else:
         app = WxAsyncApp()
-        frame = UserInterface()
+        gui = UserInterface()
+        robot = create_robot(options.fake_robot, loop)
+        engine = GameEngine(item_list)
 
-        frame.Show()
-        app.SetTopWindow(frame)
-        create_robot(options.fake_robot, loop, item_list, frame)
+        # wire up handler for new game
+        gui.connect(engine)
+        robot.connect(engine)
+
+        gui.Show()
+        app.SetTopWindow(gui)
+
         loop.run_until_complete(app.MainLoop())
 
 

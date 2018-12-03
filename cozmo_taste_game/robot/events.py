@@ -9,9 +9,13 @@ class EvtTagRead(Event):
     tag: str = ''
 
 
-class EvtStartNewGame(Event):
+class EvtNewGameStarted(Event):
     """The event sent when a new game is started"""
     food_group: FoodGroup = None
+
+
+class EvtStartNewGame(Event):
+    """The event sent when a new game is started"""
 
 
 class EvtUnknownTag(Event):
