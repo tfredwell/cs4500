@@ -3,9 +3,8 @@ from wxasync import AsyncBind
 import wx.lib.buttons
 from cozmo_taste_game.robot import EvtNewGameStarted, EvtWrongFood, EvtUnknownTag, EvtCorrectFood
 from cozmo_taste_game.user_interface import helpers
-from cozmo_taste_game.user_interface.AddFoodItemDialog import AddFoodItemDialog
-from cozmo_taste_game.user_interface.DeleteFoodItemDialog import DeleteFoodItemDialog
-from cozmo_taste_game.user_interface.EditFoodItemDialog import EditFoodItemDialog
+from cozmo_taste_game.user_interface.add_or_edit_food_item_dialog import AddOrEditFoodItemDialog
+from cozmo_taste_game.user_interface.delete_food_item_dialog import DeleteFoodItemDialog
 from cozmo_taste_game.user_interface.LogPanel import LogPanel
 
 
@@ -17,7 +16,7 @@ class UserInterface(wx.Frame):
         wx.Frame.__init__(self, *args, **kwds)
         self.cozmo_bitmap = helpers.load_image("cozmo.jpg")
         self.connected_bitmap = helpers.scale_image(helpers.load_image("disconnected.jpg"), 64)
-        self.disconnected_bitmap =  helpers.scale_image(helpers.load_image("connected.jpg"), 64)
+        self.disconnected_bitmap = helpers.scale_image(helpers.load_image("connected.jpg"), 64)
 
         self.game_engine.add_event_hander(EvtNewGameStarted, self.on_new_game)
         self.game_engine.add_event_hander(EvtWrongFood, self.on_tag_scanned)
@@ -140,14 +139,14 @@ class UserInterface(wx.Frame):
 
     def show_add_new_food(self, event):  # wxGlade: UserInterface.<event_handler>
         if not self.child:
-            child = AddFoodItemDialog(self)
+            child = AddOrEditFoodItemDialog(self)
             child.save_callback = self.save_new_item
             self.child = child
-            self.child.Show()
+            self.child.ShowModal()
 
     def show_edit_food(self, event):  # wxGlade: UserInterface.<event_handler>
-        self.child = EditFoodItemDialog(self)
-        self.child.Show()
+        self.child = AddOrEditFoodItemDialog(self, is_edit=True)
+        self.child.ShowModal()
 
     def show_remove_food(self, event):  # wxGlade: UserInterface.<event_handler>
         self.child = DeleteFoodItemDialog(self)

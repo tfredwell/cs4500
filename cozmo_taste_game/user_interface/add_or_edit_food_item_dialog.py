@@ -14,29 +14,35 @@ from cozmo_taste_game import FoodItem, FoodGroup
 from cozmo_taste_game.user_interface import helpers
 
 
-class AddFoodItemDialog(wx.Dialog):
+
+class AddOrEditFoodItemDialog(wx.Dialog):
     def __init__(self, *args, **kwds):
 
         food_groups = []
         for group in list(FoodGroup):
             food_groups.append(group.name)
-        # begin wxGlade: AddFoodItemDialog.__init__
+        if "is_edit" in kwds:
+            self.is_edit = kwds.get("is_edit")
+            del kwds["is_edit"]
+
         kwds["style"] = kwds.get("style", 0) | wx.DEFAULT_DIALOG_STYLE
         wx.Dialog.__init__(self, *args, **kwds)
+
+
+
+
+
+        self.Bind(wx.EVT_CLOSE, self.on_cancel)
+
         self.tag_text_control = wx.TextCtrl(self, wx.ID_ANY, "")
-        self.tag_text_control.Bind(wx.EVT_KILL_FOCUS, self.check_save_enable)
 
         self.name_text_control = wx.TextCtrl(self, wx.ID_ANY, "")
-        self.name_text_control.Bind(wx.EVT_KILL_FOCUS, self.check_save_enable)
 
         self.food_group_combo = wx.ComboBox(self, wx.ID_ANY, choices=food_groups, style=wx.CB_READONLY)
-        self.food_group_combo.Bind(wx.EVT_KILL_FOCUS, self.check_save_enable)
 
         self.taste_text_control = wx.TextCtrl(self, wx.ID_ANY, "")
-        self.taste_text_control.Bind(wx.EVT_KILL_FOCUS, self.check_save_enable)
 
         self.add_button = wx.Button(self, wx.ID_ANY, "Add")
-        self.add_button.Disable()
         self.cancel_button = wx.Button(self, wx.ID_ANY, "Cancel")
 
         self.Bind(wx.EVT_BUTTON, self.on_save, self.add_button)
@@ -97,23 +103,25 @@ class AddFoodItemDialog(wx.Dialog):
 
 
     def on_save(self, _):
-        tag = self.extract_value(self.tag_text_control)
-        name = self.extract_value(self.name_text_control)
-        group = self.extract_value(self.food_group_combo)
-        taste = self.extract_value(self.taste_text_control)
+        if self.can_save():
+            tag = self.extract_value(self.tag_text_control)
+            name = self.extract_value(self.name_text_control)
+            group = self.extract_value(self.food_group_combo)
+            taste = self.extract_value(self.taste_text_control)
 
 
-        food_item = FoodItem(tag=tag, name=name, food_group=FoodGroup[group], taste=taste )
-        self.save_callback(food_item)
-        self.Destroy()
+            food_item = FoodItem(tag=tag, name=name, food_group=FoodGroup[group], taste=taste )
+            self.save_callback(food_item)
+            self.Destroy()
+        else:
+            wx.MessageBox('All fields must be entered', parent=self)
+
 
     def has_text(self, control):
         return len(self.extract_value(control)) > 1
 
-    def check_save_enable(self, _):
+    def can_save(self) -> bool:
         controls = [self.tag_text_control, self.taste_text_control, self.food_group_combo, self.name_text_control]
-        all_filled_out = all(self.has_text(ctrl) for ctrl in controls)
-        if all_filled_out:
-            self.add_button.Enable()
-        else:
-            self.add_button.Disable()
+        return all(self.has_text(ctrl) for ctrl in controls)
+
+
