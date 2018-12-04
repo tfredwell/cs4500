@@ -10,6 +10,7 @@ from wxasync import WxAsyncApp
 from cozmo_taste_game import FoodItem, Reader, FakeReader, RfidReader, RealTasterBot, UserInterface, GameEngine
 from cozmo_taste_game.food.food_group import FoodGroup
 from cozmo_taste_game.robot import FakeCozmo
+from cozmo_taste_game.user_interface.app import CozmoTasteGameInterface
 
 
 def load_items(file_name: str) -> List[FoodItem]:
@@ -43,6 +44,7 @@ def create_robot(use_fake, loop):
         bot.world = fake.world
         # asyncio.ensure_future(bot.start())
     else:
+        bot = RealTasterBot()
         conn = cozmo.connect_on_loop(loop)
         asyncio.ensure_future(bot.run(conn))
         return bot
@@ -71,19 +73,11 @@ def main():
         create_robot(options.fake_robot, loop)
         loop.run_forever()
     else:
-        app = WxAsyncApp()
-        gui = UserInterface()
-        robot = create_robot(options.fake_robot, loop)
-        engine = GameEngine(item_list)
-
-        # wire up handler for new game
-        gui.connect(engine)
+        engine = GameEngine(item_list, loop)
+        robot = create_robot(False, loop)
         robot.connect(engine)
-
-        gui.Show()
-        app.SetTopWindow(gui)
-
-        loop.run_until_complete(app.MainLoop())
+        game = CozmoTasteGameInterface(engine)
+        loop.run_until_complete(game.MainLoop())
 
 
 main()

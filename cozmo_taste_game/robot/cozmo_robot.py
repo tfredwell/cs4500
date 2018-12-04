@@ -14,7 +14,7 @@ class RealTasterBot:
         try:
             self.cozmo = await connection.wait_for_robot()
             self.world = self.cozmo.world
-
+            print('runnint')
             while True:
                 await sleep(0.1)
         except KeyboardInterrupt:
