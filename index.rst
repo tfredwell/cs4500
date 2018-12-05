@@ -33,7 +33,7 @@ under Diagrams.
 For more detailed information about the various packages, modules, and functions used throughout the Cozmo
 Build a Plate Game program please see the various links under API.
 
-We also have information about how the Image Recognition works under Image Recognition.
+
 
 For information about how this documentation website was built and how to maintain it visit
 Documentation under About.

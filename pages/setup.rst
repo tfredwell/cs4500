@@ -1,51 +1,46 @@
 Setup
 =====
 
-1. Follow the instructions on https://www.python.org/downloads/ to download and install python 3.7.
 
-2. Clone the repository onto your local machine.
+RFID - Radio-Frequency Identification
+Game Setup Instructions -- Windows/Mac -- program is not optimized for Linux distributions
+
+1.) Follow the instructions on https://www.python.org/downloads/ to download and install python 3.7.
+
+2.) Clone the repository onto your local machine.
 
 .. code-block:: bash
 
    git clone https://github.com/tfredwell/cs4500.git
 
-3. Navigate to the repository.
+3.) Navigate to the repository.
 
 .. code-block:: bash
 
-   cd CozmoTasteProject
+   cd CozmoTasteProject.
 
-4. Create a python3.7 virtual environment. See `the official python tutorial
-   <https://docs.python.org/3/tutorial/venv.html>`_ for more information.
+4.) Install all dependencies located within the requirements text file installed -- download application and type pip install -r  requirements.txt
 
-.. code-block:: bash
+5.) Make sure to install Itunes on Windows machines: https://support.apple.com/downloads/itunes
+ Install Android Debug Bridge for Android devices: http://cozmosdk.anki.com/docs/getstarted.html#starting-up-the-sdk.
 
-   python3.7 -m venv virtualenv venv
+6.) Once the programs have been installed, connect the USB cord to the USB port and to either the phone or tablet with the Cozmo app installed. (picture of setup)
 
-5. Activate the virtual environment.
+7.) Connect the phone or tablet to Cozmo via wifi. Open the Cozmo app, once on screen hit connect, the app will then start searching for Cozmo. /ss/(phone) 
+-- On the connected cell phone, turn off cellular data, make sure the device is not set to auto connect to any other network during gameplay. Possibly forget every network on the device and reconnect them at a later time. Otherwise, Cozmo will disconnect and will not respond.
 
-.. code-block:: bash
+8.) With a successful connection to Cozmo, Double click CozmoTasteGame app on computer Click on the start game button with Cozmos face under game controls. /ss/
 
-   source virtualenv/bin/activate
+9.) Cozmo will then instruct you on which food he would like to taste.
 
-6. Install dependencies.
+10.) To replay the game or to have Cozmo change which food group he would like to taste simply press the (start game) button again.
 
-.. code-block:: bash
+11.) To quit the game, simply hit the red X in the top corner. On your phone, click disable SDK or you may close the app. /sss/
 
-   pip install -r requirements.txt
+Potential Issues with gameplay
+-Do not try to use ios device on Linux as it will not work properly.
+-Connect Cozmo and RFID readers to a computer that has the proper software installed ( Listed above) or the program will not work properly.
+-Each food item is assigned to only one food group.
+--Example-- Peanuts would be considered a grain in this game even though it can be used as a protein.
+-iPhone issues-- could not connect to Cozmo unless you first launch iTunes, the initial opening of iTunes allows the successful communication of an IOS device to the Cozmo robot.
 
-7. If you have an android device, follow the steps `here <http://cozmosdk.anki.com/docs/adb.html>`_ to download and install the Android Debug Bridge.
-
-8. Follow step 1-4 under Starting Up the SDK `here <http://cozmosdk.anki.com/docs/getstarted.html#starting-up-the-sdk>`_ to connect Cozmo in SDK mode.
-
-9. With Cozmo connected, run the main program.
-
-.. code-block:: bash
-
-   python3.7 main.py
-
-10. Or skip steps 7-9 and use the -g flag to run a simulation of the program without Cozmo.
-
-.. code-block:: bash
-
-   python3.7 main.py -g
