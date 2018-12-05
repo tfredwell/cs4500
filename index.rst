@@ -22,7 +22,7 @@ The Cozmo Build a Plate Game is a game intended for children who are aged 3 - 6.
 of the game is build a plate that Cozmo will like to eat. For more information about the game
 and how it is played, please click the following button to download the user's guide.
 
-:download:`Download the User's Guide <_static/UserGuide.pdf>`
+:download:`Download the User's Guide <https://docs.google.com/document/d/1LqF_U3-tHvY6XhqdeqVIEKbY_tAriUCiIkS9gHQ1OGg/edit>`
 
 Please review the Setup page under Getting Started for instructions on how to get
 setup to start developing the Cozmo Build a Plate Game project.
