@@ -178,33 +178,42 @@
 <h1>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h1>
 <p>RFID - Radio-Frequency Identification
 Game Setup Instructions – Windows/Mac – program is not optimized for Linux distributions</p>
-<p>1.) Follow the instructions on <a class="reference external" href="https://www.python.org/downloads/">https://www.python.org/downloads/</a> to download and install python 3.7.</p>
-<p>2.) Clone the repository onto your local machine.</p>
+<p>1.) Follow the instructions on <a class="reference external" href="https://www.python.org/downloads/">https://www.python.org/downloads/</a> to download and install python 3.7.  We used the Pycharm python community editor.  <a class="reference external" href="https://www.jetbrains.com/pycharm/download/#section=windows">https://www.jetbrains.com/pycharm/download/#section=windows</a>.</p>
+<p>1a.) Clone the repository onto your local machine- on the command line type:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/tfredwell/cs4500.git
 </pre></div>
 </div>
-<p>3.) Navigate to the repository.</p>
+<p>1b.) Navigate to the repository.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> CozmoTasteProject.
 </pre></div>
 </div>
-<p>4.) Install all dependencies located within the requirements text file installed – download application and type pip install -r  requirements.txt</p>
+<p>1c.) Install the Wx Library - First you need to add the path:</p>
+<p>to Environment Variable</p>
+<p>2.)  Next open the command prompt and type:
+.. code_block:: bash</p>
+<blockquote>
+<div>pip install wxpython</div></blockquote>
+<p>3.)  After that, open PyCharm and add the recently installed library to your environment.</p>
+<p>4.)  –Navigate to File -&gt; Settings -&gt; Project. Under Project, click the plus bottom and the list of available packages will show. When you find the wxpython package, click Install package.</p>
+<p>5.) Install all dependencies located within the requirements text file installed – download application and type pip install -r  requirements.txt</p>
 <dl class="docutils">
-<dt>5.) Make sure to install Itunes on Windows machines: <a class="reference external" href="https://support.apple.com/downloads/itunes">https://support.apple.com/downloads/itunes</a></dt>
+<dt>6.) Make sure to install Itunes on Windows machines: <a class="reference external" href="https://support.apple.com/downloads/itunes">https://support.apple.com/downloads/itunes</a></dt>
 <dd>Install Android Debug Bridge for Android devices: <a class="reference external" href="http://cozmosdk.anki.com/docs/getstarted.html#starting-up-the-sdk">http://cozmosdk.anki.com/docs/getstarted.html#starting-up-the-sdk</a>.</dd>
 </dl>
-<p>6.) Once the programs have been installed, connect the USB cord to the USB port and to either the phone or tablet with the Cozmo app installed. (picture of setup)</p>
-<p>7.) Connect the phone or tablet to Cozmo via wifi. Open the Cozmo app, once on screen hit connect, the app will then start searching for Cozmo. /ss/(phone)
-– On the connected cell phone, turn off cellular data, make sure the device is not set to auto connect to any other network during gameplay. Possibly forget every network on the device and reconnect them at a later time. Otherwise, Cozmo will disconnect and will not respond.</p>
-<p>8.) With a successful connection to Cozmo, Double click CozmoTasteGame app on computer Click on the start game button with Cozmos face under game controls. /ss/</p>
+<p>7.) Once the programs have been installed, connect the USB cord to the USB port and to either the phone or tablet with the Cozmo app installed. (picture of setup)</p>
+<p>8.) Connect the phone or tablet to Cozmo via wifi. Open the Cozmo app, once on screen hit connect, the app will then start searching for Cozmo. If Cozmo is not found, follow the onscreen instructions to continue.</p>
+<p>– On the connected cell phone, turn off cellular data, make sure the device is not set to auto connect to any other network during gameplay. Possibly forget every network on the device and reconnect them at a later time. Otherwise, Cozmo will disconnect and will not respond.
+– If you still need further assistance with this step Follow step 1-4 under Starting Up the SDK <a class="reference external" href="http://cozmosdk.anki.com/docs/getstarted.html#starting-up-the-sdk">http://cozmosdk.anki.com/docs/getstarted.html#starting-up-the-sdk</a> to connect Cozmo in SDK mode.</p>
+<p>8.) After successfully connecting to Cozmo, Double click the downloaded CozmoTasteGame app on the computer and click the start game button with Cozmos face under game controls.</p>
 <p>9.) Cozmo will then instruct you on which food he would like to taste.</p>
 <p>10.) To replay the game or to have Cozmo change which food group he would like to taste simply press the (start game) button again.</p>
-<p>11.) To quit the game, simply hit the red X in the top corner. On your phone, click disable SDK or you may close the app. /sss/</p>
-<p>Potential Issues with gameplay
--Do not try to use ios device on Linux as it will not work properly.
--Connect Cozmo and RFID readers to a computer that has the proper software installed ( Listed above) or the program will not work properly.
--Each food item is assigned to only one food group.
-–Example– Peanuts would be considered a grain in this game even though it can be used as a protein.
--iPhone issues– could not connect to Cozmo unless you first launch iTunes, the initial opening of iTunes allows the successful communication of an IOS device to the Cozmo robot.</p>
+<p>11.) To quit the game, hit the X in the top right corner of the Cozmo Taste Game. Alternatively, you may use your phone by pressing disable SDK or by simply closing the app.</p>
+<p>Potential Issues with gameplay:</p>
+<p>-Do not try to use ios device on Linux as it will not work properly.</p>
+<p>-Connect Cozmo and RFID readers to a computer that has the proper software installed ( Listed above) or the program will not work properly.</p>
+<p>-Each food item is assigned to only one food group.</p>
+<p>–Example– Peanuts would be considered a grain in this game even though it can be used as a protein.</p>
+<p>-iPhone issues– could not connect to Cozmo unless you first launch iTunes, the initial opening of iTunes allows the successful communication of an IOS device to the Cozmo robot.</p>
 </div>
 
 

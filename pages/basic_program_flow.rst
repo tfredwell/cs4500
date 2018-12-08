@@ -11,13 +11,13 @@ We are using a RFID reader in order to capture the "Image" of the food being pla
 Game Loop
 ------------
 
-The game is played through once automatically after checking whether the RFID reader is active. After a full run through of the game, the user is prompted on whether or not they want to play the game again or they would like to quit.
+ After all necessary software has been installed and successful connection to the RFID reader, the game is played through once by pressing start game. Cozmo indicates what the type of food he is looking for, the user is notified whether the food is correct, incorrect, or unknown. Once a correct item has been scanned, Cozmo will make a happy gesture repeating back the food item and its taste then the game terminates. Press the Start Game button again in order to start the next iteration of gameplay. 
+-- If at any time during the iteration you cannot find Cozmo's requested food group item simply press Start Game again to change the group.
 
 Food Analyzer
 ----------------
 
-RFID reader scans a tagtakes each fruit tag and compares it with a stored value to determine which fruit has been chosen. Once a full plate has been made from the different food groups the "Plate" is cleared and ready to accept food again.
-
+ RFID reader scans a tag. If the tag is apart of the items.csv file then Cozmo will be able to identify it during gameplay. Otherwise, Cozmo will mention that the tag (food item) being scanned is unknown.
 
 **References**
 
