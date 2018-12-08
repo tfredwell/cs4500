@@ -21,13 +21,13 @@ Game Setup Instructions -- Windows/Mac -- program is not optimized for Linux dis
 
 1c.) Install the Wx Library - First you need to add the path:
 
-.. code-block:: bash 
+ 
     C:\Users\PCName\AppData\Local\Programs\Python\Python37-32\Scripts 
 
 to Environment Variable
 
 2.)  Next open the command prompt and type:
-.. code_block:: bash
+
    pip install wxpython
 
 3.)  After that, open PyCharm and add the recently installed library to your environment.
