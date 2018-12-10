@@ -1,7 +1,7 @@
 import wx
 from wxasync import AsyncBind
 import wx.lib.buttons
-from cozmo_taste_game.robot import EvtNewGameStarted, EvtWrongFood, EvtUnknownTag, EvtCorrectFood
+from cozmo_taste_game.robot import EvtNewGameStarted, EvtWrongFoodGroup, EvtUnknownTag, EvtCorrectFoodGroup
 from cozmo_taste_game.user_interface import helpers
 from cozmo_taste_game.user_interface.add_or_edit_food_item_dialog import AddOrEditFoodItemDialog
 from cozmo_taste_game.user_interface.delete_food_item_dialog import DeleteFoodItemDialog
@@ -9,8 +9,10 @@ from cozmo_taste_game.user_interface.LogPanel import LogPanel
 
 
 class UserInterface(wx.Frame):
-    def __init__(self, game_engine, *args, **kwds):
+    def __init__(self, game_engine, food_item_manager, *args, **kwds):
         # begin wxGlade: UserInterface.__init__
+        self.food_item_manager = food_item_manager
+        self.child = None
         kwds["style"] = kwds.get("style", 0) | wx.DEFAULT_FRAME_STYLE
         self.game_engine = game_engine
         wx.Frame.__init__(self, *args, **kwds)
@@ -19,9 +21,9 @@ class UserInterface(wx.Frame):
         self.disconnected_bitmap = helpers.scale_image(helpers.load_image("connected.jpg"), 64)
 
         self.game_engine.add_event_hander(EvtNewGameStarted, self.on_new_game)
-        self.game_engine.add_event_hander(EvtWrongFood, self.on_tag_scanned)
+        self.game_engine.add_event_hander(EvtWrongFoodGroup, self.on_tag_scanned)
         self.game_engine.add_event_hander(EvtUnknownTag, self.on_tag_scanned)
-        self.game_engine.add_event_hander(EvtCorrectFood, self.on_tag_scanned)
+        self.game_engine.add_event_hander(EvtCorrectFoodGroup, self.on_tag_scanned)
 
         # Menu Bar
         self.frame_menubar = wx.MenuBar()
@@ -35,10 +37,6 @@ class UserInterface(wx.Frame):
         self.Bind(wx.EVT_MENU, self.show_remove_food, id=delete_item.GetId())
         self.frame_menubar.Append(food_management_menu, "&Manage Food")
 
-
-
-
-
         info_menu = wx.Menu()
         item = info_menu.Append(wx.ID_ANY, "Show Log", "Click to display logging information")
         self.Bind(wx.EVT_MENU, self.show_logs, id=item.GetId())
@@ -47,16 +45,14 @@ class UserInterface(wx.Frame):
         self.SetMenuBar(self.frame_menubar)
         # Menu Bar end
 
-
-        self.connect_toggle = wx.lib.buttons.ThemedGenBitmapTextButton(self, -1, self.disconnected_bitmap, size=(72, 72))
+        self.connect_toggle = wx.lib.buttons.ThemedGenBitmapTextButton(self, -1, self.disconnected_bitmap,
+                                                                       size=(72, 72))
         self.connected_label_text = wx.StaticText(self, wx.ID_ANY, "Connect", style=wx.ALIGN_CENTER)
         self.text_tag_entry = wx.TextCtrl(self, wx.ID_ANY, "", style=wx.TE_PROCESS_ENTER)
 
-
         cozmo_bitmap = helpers.scale_image(self.cozmo_bitmap, 118)
 
-
-        self.start_game_button =start_game_button = wx.lib.buttons.ThemedGenBitmapTextButton(self, -1, cozmo_bitmap, size=(128, 128))
+        self.start_game_button = wx.lib.buttons.ThemedGenBitmapTextButton(self, -1, cozmo_bitmap, size=(128, 128))
         self.food_group_looking_for = wx.StaticText(self, wx.ID_ANY, "")
         self.received_label = wx.StaticText(self, wx.ID_ANY, "")
 
@@ -70,7 +66,6 @@ class UserInterface(wx.Frame):
     def __set_properties(self):
         # begin wxGlade: UserInterface.__set_properties
         self.SetTitle("Cozmo Taste Game")
-
 
         _icon = wx.NullIcon
         _icon.CopyFromBitmap(self.cozmo_bitmap)
@@ -185,7 +180,8 @@ class UserInterface(wx.Frame):
 
         self.received_label.SetLabel(f'{food_name} - {food_group}')
 
-    async  def handle_menu(self, event):
+    @staticmethod
+    async  def handle_menu(event):
         print(event)
         event.skip()
 # end of class UserInterface

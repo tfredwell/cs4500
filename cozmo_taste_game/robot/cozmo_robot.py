@@ -4,11 +4,10 @@ from typing import List
 
 import cozmo
 
-from cozmo_taste_game.robot import EvtWrongFood, EvtCorrectFood, EvtUnknownTag, EvtNewGameStarted
+from cozmo_taste_game.robot import EvtWrongFoodGroup, EvtCorrectFoodGroup, EvtUnknownTag, EvtNewGameStarted
 import logging
 
 logger = logging.getLogger('cozmo_taste_game.robot')
-
 
 
 class RealTasterBot:
@@ -35,11 +34,11 @@ class RealTasterBot:
         logger.info(f'recv event {evt}')
         await self.__safe_say_text('Hmm, I do not know what that is!')
 
-    async def __wrong_food(self, evt: EvtWrongFood, **kw) -> None:
+    async def __wrong_food(self, evt: EvtWrongFoodGroup, **kw) -> None:
         logger.info(f'recv event {evt}')
         await self.__safe_say_text(f'A {evt.food_item.name} is not a {evt.expected_food_group.name}')
 
-    async def __correct_food(self, evt: EvtCorrectFood, **kw) -> None:
+    async def __correct_food(self, evt: EvtCorrectFoodGroup, **kw) -> None:
         logger.info(f'recv event {evt}')
         msg = f'Yum! The {evt.food_item.food_group.name} {evt.food_item.name} is {evt.food_item.taste}'
         await self.__safe_say_text(msg, in_parallel=True)
@@ -55,5 +54,5 @@ class RealTasterBot:
     def connect(self, engine):
         engine.add_event_hander(EvtNewGameStarted, self.__start_new_game)
         engine.add_event_hander(EvtUnknownTag, self.__unknown_tag)
-        engine.add_event_hander(EvtWrongFood, self.__wrong_food)
-        engine.add_event_hander(EvtCorrectFood, self.__correct_food)
+        engine.add_event_hander(EvtWrongFoodGroup, self.__wrong_food)
+        engine.add_event_hander(EvtCorrectFoodGroup, self.__correct_food)

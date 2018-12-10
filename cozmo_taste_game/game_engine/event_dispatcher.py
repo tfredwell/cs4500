@@ -1,3 +1,8 @@
+from typing import Mapping, Callable
+
+from cozmo.event import Event
+
+
 class EventDispatcher:
 
     def __init__(self):

@@ -5,35 +5,30 @@ from cozmo_taste_game.food.food_group import FoodGroup
 
 
 class EvtTagRead(Event):
-    """The event sent when a tag has been read"""
+    """
+    An event signifying that a RFID tag has been read
+    """
     tag: str = ''
 
 
 class EvtNewGameStarted(Event):
-    """The event sent when a new game is started"""
+    """
+    The event sent when a new game is started
+    """
     food_group: FoodGroup = None
 
 
-class EvtStartNewGame(Event):
-    """The event sent when a new game is started"""
-
-
 class EvtUnknownTag(Event):
-    """The event sent when a new game is started"""
+    """The event sent when an tag that has been scanned is unknown"""
     tag: str = ''
 
 
-class EvtTagFound(Event):
-    """The event sent when a new game is started"""
-    food_item: FoodItem = None
-
-
-class EvtWrongFood(Event):
-    """The event sent when a new game is started"""
+class EvtWrongFoodGroup(Event):
+    """An event signifying that the scanned tag was not in the food group expected"""
     expected_food_group: FoodGroup = None
     food_item: FoodItem = None
 
 
-class EvtCorrectFood(Event):
-    """The event sent when a new game is started"""
+class EvtCorrectFoodGroup(Event):
+    """An event signifying that the scanned tag was in the food group expected"""
     food_item: FoodItem = None

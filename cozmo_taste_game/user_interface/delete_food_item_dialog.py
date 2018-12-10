@@ -15,7 +15,7 @@ from cozmo_taste_game.user_interface import helpers
 
 
 class DeleteFoodItemDialog(wx.Dialog):
-    def __init__(self, *args, **kwds):
+    def __init__(self, food_item_manager, *args, **kwds):
         # begin wxGlade: DeleteFoodItemDialog.__init__
         kwds["style"] = kwds.get("style", 0) | wx.DEFAULT_DIALOG_STYLE
         wx.Dialog.__init__(self, *args, **kwds)
