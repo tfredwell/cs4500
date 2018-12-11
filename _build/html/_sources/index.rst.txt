@@ -14,24 +14,24 @@
 
 |br|
 
-Cozmo Build a Plate Game Documentation
+Cozmo Taste Game Documentation
 ======================================
 
-Welcome to the programmer's documentation website for the Cozmo Build a Plate Game!
-The Cozmo Build a Plate Game is a game intended for children who are aged 3 - 6. The goal
-of the game is build a plate that Cozmo will like to eat. For more information about the game
+Welcome to the programmer's documentation website for the Cozmo Taste Game!
+The Cozmo Taste Game is a game intended for children who are aged 3 - 6. The goal
+of the game is for children to pick the food that matches the food group that Cozmo says. For more information about the game
 and how it is played, please click the following button to download the user's guide.
 
 See user's guide:  https://docs.google.com/document/d/1LqF_U3-tHvY6XhqdeqVIEKbY_tAriUCiIkS9gHQ1OGg/edit
 
 Please review the Setup page under Getting Started for instructions on how to get
-setup to start developing the Cozmo Build a Plate Game project.
+setup to start developing the Cozmo Taste project.
 
 For a high level overview of how the various packages are used throughout the code see Class Diagrams
 under Diagrams.
 
-For more detailed information about the various packages, modules, and functions used throughout the Cozmo
-Build a Plate Game program please see the various links under API.
+For more detailed information about the various packages, modules, and functions used throughout the Cozmo Taste Game
+program please see the various links under API.
 
 
 
