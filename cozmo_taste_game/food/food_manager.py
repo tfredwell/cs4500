@@ -71,8 +71,11 @@ class FoodManager:
         """
         Rewrites the database file with all of the FoodItems currently in memory.
         """
-        with open(self.food_file_path, 'r') as file:  # Use file to refer to the file object
-            for item in self.foods:
+        with open(self.food_file_path, 'w') as file:  # Use file to refer to the file object
+            # always write the header
+            file.write('# tag, name, group taste')
+            for tag in self.foods:
+                item = self.foods[tag]
                 line = f'\n{item.tag},{item.name},{item.food_group.name},{item.taste}'
                 file.write(line)
 

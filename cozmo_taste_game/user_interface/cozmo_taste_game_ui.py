@@ -181,7 +181,7 @@ class CozmoTasteGameUI(wx.Frame):
         food_name = 'Unknown'
         food_group = 'Unknown'
 
-        if event.event_name == 'EvtWrongFood' or event.event_name == 'EvtCorrectFood':
+        if event.event_name == 'EvtWrongFoodGroup' or event.event_name == 'EvtCorrectFoodGroup':
             food_name = event.food_item.name
             food_group = event.food_item.food_group.name
 
