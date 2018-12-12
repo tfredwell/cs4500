@@ -7,5 +7,5 @@ For more information please see our documentation website: https://httpsgithubco
 
 
 
- old:: http://cozmotasteproject.readthedocs.io/en/latest/index.html
+
 
