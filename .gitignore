@@ -4,3 +4,5 @@ docs/_build
 cozmo-env
 venv
 *.jpeg
+.vagrant
+*.log
