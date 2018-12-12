@@ -27,13 +27,8 @@ See user's guide:  https://docs.google.com/document/d/1LqF_U3-tHvY6XhqdeqVIEKbY_
 Please review the Setup page under Getting Started for instructions on how to get
 setup to start developing the Cozmo Taste project.
 
-For a high level overview of how the various packages are used throughout the code see Class Diagrams
-under Diagrams.
-
 For more detailed information about the various packages, modules, and functions used throughout the Cozmo Taste Game
 program please see the various links under API.
-
-
 
 For information about how this documentation website was built and how to maintain it visit
 Documentation under About.
