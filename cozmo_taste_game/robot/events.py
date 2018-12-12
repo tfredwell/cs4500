@@ -32,3 +32,15 @@ class EvtWrongFoodGroup(Event):
 class EvtCorrectFoodGroup(Event):
     """An event signifying that the scanned tag was in the food group expected"""
     food_item: FoodItem = None
+
+
+class EvtNoRobotConnected(Event):
+    """An event that occurs when an attempt is made to manipulate a robot that is not connected"""
+
+
+class EvtRobotConnected(Event):
+    """An event that occurs when a robot is connected"""
+
+
+class EvtRobotDisonnected(Event):
+    """An event that occurs when a robot is disconnected"""

@@ -18,6 +18,10 @@ class FoodManager:
         self.foods = dict()
 
     def load_items(self) -> None:
+        """
+        Loads items from the food database file
+        :return: None
+        """
         if path.isfile(self.food_file_path):
             with open(self.food_file_path) as item_file:
                 for line in item_file:
@@ -29,16 +33,22 @@ class FoodManager:
 
                         item = FoodItem(tag=tag, name=name, food_group=FoodGroup[group.strip()], taste=taste.strip())
                         self.foods[item.tag] = item
+        else:
+            raise FileNotFoundError()
 
     async def add_item(self, item: FoodItem) -> None:
         """
         adds an item to the food manager
         :param item: the item to add
         """
-        with open(self.food_file_path, 'a+') as file:  # Use file to refer to the file object
-            line = f'\n{item.tag},{item.name},{item.food_group.name},{item.taste}'
-            file.write(line)
-        self.foods[item.tag] = item
+        try:
+            with open(self.food_file_path, 'a+') as file:  # Use file to refer to the file object
+                line = f'\n{item.tag},{item.name},{item.food_group.name},{item.taste}'
+                file.write(line)
+            self.foods[item.tag] = item
+            return item
+        except:
+            return None
 
     def get_items(self) -> Mapping[str, FoodItem]:
         """
@@ -56,19 +66,6 @@ class FoodManager:
         if item.tag in self.foods:
             del self.foods[item.tag]
             await self.__rewrite_file()
-
-    async def edit_item(self, old_item: FoodItem, new_item: FoodItem) -> None:
-        """
-        Edits an item from the food manager it it exists. If the item does not exist it will be added
-        :param old_item: The old :class:FoodItem to be edited
-        :param new_item: The new :class:FoodItem with updated values
-        """
-        if old_item.tag in self.foods:
-            del self.foods[old_item.tag]
-            self.foods[new_item.tag] = new_item
-            await self.__rewrite_file()
-        else:
-            await self.add_item(new_item)
 
     async def __rewrite_file(self) -> None:
         """

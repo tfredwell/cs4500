@@ -1,40 +1,41 @@
-import wx
-from wxasync import AsyncBind
 import wx.lib.buttons
-from cozmo_taste_game.robot import EvtNewGameStarted, EvtWrongFoodGroup, EvtUnknownTag, EvtCorrectFoodGroup
-from cozmo_taste_game.user_interface import helpers
-from cozmo_taste_game.user_interface.add_or_edit_food_item_dialog import AddOrEditFoodItemDialog
-from cozmo_taste_game.user_interface.delete_food_item_dialog import DeleteFoodItemDialog
-from cozmo_taste_game.user_interface.LogPanel import LogPanel
+from wx import MenuItem
+from wxasync import AsyncBind
+
+from cozmo_taste_game.user_interface.async_ui_helpers import AsyncShowDialog, AsyncBindParams
+from . import *
 
 
-class UserInterface(wx.Frame):
+class CozmoTasteGameUI(wx.Frame):
     def __init__(self, game_engine, food_item_manager, *args, **kwds):
         # begin wxGlade: UserInterface.__init__
+
         self.food_item_manager = food_item_manager
         self.child = None
         kwds["style"] = kwds.get("style", 0) | wx.DEFAULT_FRAME_STYLE
         self.game_engine = game_engine
         wx.Frame.__init__(self, *args, **kwds)
-        self.cozmo_bitmap = helpers.load_image("cozmo.jpg")
-        self.connected_bitmap = helpers.scale_image(helpers.load_image("disconnected.jpg"), 64)
-        self.disconnected_bitmap = helpers.scale_image(helpers.load_image("connected.jpg"), 64)
+        self.cozmo_bitmap = helpers.load_image("resources/cozmo.jpg")
+        self.disconnected_bitmap = helpers.scale_image(helpers.load_image("resources/disconnected.jpg"), 64)
+        self.connected_bitmap = helpers.scale_image(helpers.load_image("resources/connected.jpg"), 64)
 
         self.game_engine.add_event_hander(EvtNewGameStarted, self.on_new_game)
         self.game_engine.add_event_hander(EvtWrongFoodGroup, self.on_tag_scanned)
         self.game_engine.add_event_hander(EvtUnknownTag, self.on_tag_scanned)
         self.game_engine.add_event_hander(EvtCorrectFoodGroup, self.on_tag_scanned)
+        self.game_engine.add_event_hander(EvtNoRobotConnected, self.on_no_robot_connected)
+        self.game_engine.add_event_hander(EvtRobotConnected, self.on_robot_connected)
+        self.game_engine.add_event_hander(EvtRobotDisonnected, self.on_robot_disconnected)
 
         # Menu Bar
         self.frame_menubar = wx.MenuBar()
         food_management_menu = wx.Menu()
-        new_item = food_management_menu.Append(wx.ID_NEW, "New", "Click to add a new food item")
-        edit_item = food_management_menu.Append(wx.ID_EDIT, "Edit", "Click to add a new food item")
-        delete_item = food_management_menu.Append(wx.ID_DELETE, "Delete", "Click to remove a food item")
+        self.new_item: MenuItem = food_management_menu.Append(wx.ID_NEW, "New", "Click to add a new food item")
+        self.delete_item: MenuItem = food_management_menu.Append(wx.ID_DELETE, "Delete", "Click to remove a food item")
 
-        self.Bind(wx.EVT_MENU, self.show_add_new_food, id=new_item.GetId())
-        self.Bind(wx.EVT_MENU, self.show_edit_food, id=edit_item.GetId())
-        self.Bind(wx.EVT_MENU, self.show_remove_food, id=delete_item.GetId())
+        AsyncBindParams(wx.EVT_MENU, self.show_add_new_food, self, id=self.new_item.GetId())
+        AsyncBindParams(wx.EVT_MENU, self.show_remove_food, self, id=self.delete_item.GetId())
+
         self.frame_menubar.Append(food_management_menu, "&Manage Food")
 
         info_menu = wx.Menu()
@@ -58,7 +59,6 @@ class UserInterface(wx.Frame):
 
         self.__set_properties()
         self.__do_layout()
-
         AsyncBind(wx.EVT_BUTTON, self.connect_toggle_clicked, self.connect_toggle)
         AsyncBind(wx.EVT_TEXT_ENTER, self.on_tag_entered, self.text_tag_entry)
         AsyncBind(wx.EVT_BUTTON, self.start_game_clicked, self.start_game_button)
@@ -128,35 +128,30 @@ class UserInterface(wx.Frame):
 
     # end wxGlade
 
-    def save_new_item(self, item):
-        self.game_engine.add_food_item(item)
 
 
-    def show_add_new_food(self, event):  # wxGlade: UserInterface.<event_handler>
-        if not self.child:
-            child = AddOrEditFoodItemDialog(self)
-            child.save_callback = self.save_new_item
-            self.child = child
-            self.child.ShowModal()
+    async def save_new_item(self, item):
+        await self.game_engine.add_food_item(item)
 
-    def show_edit_food(self, event):  # wxGlade: UserInterface.<event_handler>
-        self.child = AddOrEditFoodItemDialog(self, is_edit=True)
-        self.child.ShowModal()
+    async def show_add_new_food(self, event):  # wxGlade: UserInterface.<event_handler>
+        # Sadly AsyncBind doesn't filter based on ID's like bind does. so we have to filter out for the event receiver
+        if event.Id == self.new_item.GetId():
+            child = AddOrEditFoodItemDialog(self, food_manager=self.food_item_manager)
+            await AsyncShowDialog(child)
 
-    def show_remove_food(self, event):  # wxGlade: UserInterface.<event_handler>
-        self.child = DeleteFoodItemDialog(self)
-        self.child.Show()
+    async def show_remove_food(self, event):  # wxGlade: UserInterface.<event_handler>
+        if event.Id == self.delete_item.GetId():
+            child = DeleteFoodItemDialog(self, food_manager=self.food_item_manager)
+            await AsyncShowDialog(child)
 
     def show_logs(self, event):  # wxGlade: UserInterface.<event_handler>
         self.child = LogPanel(self)
         self.child.Show()
 
-    async def connect_toggle_clicked(self, event):  # wxGlade: UserInterface.<event_handler>
+    async def connect_toggle_clicked(self, _):
         await self.game_engine.toggle_robot_connect()
 
-
-    async def start_game_clicked(self, event):  # wxGlade: UserInterface.<event_handler>
-        print('starting game')
+    async def start_game_clicked(self, _):
         await self.game_engine.start_new_game()
 
     async def on_new_game(self, event: EvtNewGameStarted):
@@ -170,6 +165,18 @@ class UserInterface(wx.Frame):
         self.text_tag_entry.Clear()
         await self.game_engine.tag_read(tag)
 
+    async def on_no_robot_connected(self, _):
+        wx.MessageBox("No robot is connected!")
+        return
+
+    async def on_robot_connected(self, _):
+        self.connect_toggle.SetBitmapLabel(self.connected_bitmap)
+        self.connected_label_text.SetLabel('Disconnect')
+
+    async def on_robot_disconnected(self, _):
+        self.connect_toggle.SetBitmapLabel(self.connected_bitmap)
+        self.connected_label_text.SetLabel('Connect')
+
     async def on_tag_scanned(self, event):
         food_name = 'Unknown'
         food_group = 'Unknown'
@@ -181,7 +188,7 @@ class UserInterface(wx.Frame):
         self.received_label.SetLabel(f'{food_name} - {food_group}')
 
     @staticmethod
-    async  def handle_menu(event):
+    async def handle_menu(event):
         print(event)
         event.skip()
 # end of class UserInterface

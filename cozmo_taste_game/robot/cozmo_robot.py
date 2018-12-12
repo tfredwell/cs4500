@@ -2,7 +2,7 @@ import asyncio
 from asyncio import sleep
 from typing import List
 
-import cozmo
+from cozmo.robot import Robot
 
 from cozmo_taste_game.robot import EvtWrongFoodGroup, EvtCorrectFoodGroup, EvtUnknownTag, EvtNewGameStarted
 import logging
@@ -13,18 +13,8 @@ logger = logging.getLogger('cozmo_taste_game.robot')
 class RealTasterBot:
 
     def __init__(self):
-
         self.cozmo = None
         self.world = None
-
-    async def run(self, connection):
-        try:
-            self.cozmo = await connection.wait_for_robot()
-            self.world = self.cozmo.world
-            while True:
-                await sleep(0.1)
-        except KeyboardInterrupt:
-            print("Exited.")
 
     async def __start_new_game(self, evt: EvtNewGameStarted, **kw) -> None:
         logger.info(f'recv event {evt}')
@@ -51,8 +41,20 @@ class RealTasterBot:
             logger.info(f'cozmo is not connected, not saying {text}')
             await asyncio.sleep(.1)
 
-    def connect(self, engine):
+    def connect(self, engine, cozmo_instance: Robot):
+        self.cozmo = cozmo_instance
+        self.world = cozmo_instance.world
+
         engine.add_event_hander(EvtNewGameStarted, self.__start_new_game)
         engine.add_event_hander(EvtUnknownTag, self.__unknown_tag)
         engine.add_event_hander(EvtWrongFoodGroup, self.__wrong_food)
         engine.add_event_hander(EvtCorrectFoodGroup, self.__correct_food)
+
+    def disconnect(self, engine) -> None:
+        """
+        Disconnects a robot from the game engine
+        """
+        engine.remove_event_handler(EvtNewGameStarted, self.__start_new_game)
+        engine.remove_event_handler(EvtUnknownTag, self.__unknown_tag)
+        engine.remove_event_handler(EvtWrongFoodGroup, self.__wrong_food)
+        engine.remove_event_handler(EvtCorrectFoodGroup, self.__correct_food)
