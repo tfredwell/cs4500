@@ -1,38 +1,24 @@
 Setup
 =====
 
-1. Follow the instructions on https://www.python.org/downloads/ to download and install python 3.6.
+1. Follow the instructions on https://www.python.org/downloads/ to download and install python 3.7.1
 
-2. Download the source code from https://github.com/tfredwell/cs4500/archive/v1.0.zip
+2. Download the source code from https://github.com/tfredwell/cs4500/archive/v1.1.zip
 
-3. Unzip the srouce code
+3. Unzip the source code
 
+4. If you have an android device, follow the steps `here <http://cozmosdk.anki.com/docs/adb.html>`_ to download and install the Android Debug Bridge.
 
-4. Create a python 3.7 virtual environment. See `the official python tutorial
-   <https://docs.python.org/3/tutorial/venv.html>`_ for more information.
+6.) Connect the phone or tablet to Cozmo via wifi. Open the Cozmo app, once on screen hit connect, the app will then start searching for Cozmo. If Cozmo is not found follow the onscreen instructions to continue.
 
-.. code-block:: bash
+-On the connected device, turn off data, make sure the device is not set to auto connect to any other network during gameplay. Possibly forget every network on the device and reconnect them at a later time. Otherwise, Cozmo will disconnect and will not respond.
 
-   python3.7 -m virtualenv venv
+-If you still need further assistance with this step Follow step 1-4 under Starting Up the SDK http://cozmosdk.anki.com/docs/getstarted.html#starting-up-the-sdk to connect Cozmo in SDK mode.
 
-5. Activate the virtual environment.
+7.) After successfully connecting to Cozmo, Double click the downloaded CozmoTasteGame app on the computer and click  the start game button with Cozmos face under game controls. 
 
-.. code-block:: bash
+8.) Cozmo will then instruct you on which food he would like to taste.
 
-   source venv/bin/activate
+9.) To replay the game or to have Cozmo change which food group he would like to taste press the (start game) button again.
 
-6. Install dependencies.
-
-.. code-block:: bash
-
-7. If you have an android device, follow the steps `here <http://cozmosdk.anki.com/docs/adb.html>`_ to download and install the Android Debug Bridge.
-
-8. Follow step 1-4 under Starting Up the SDK `here <http://cozmosdk.anki.com/docs/getstarted.html#starting-up-the-sdk>`_ to connect Cozmo in SDK mode.
-
-9. With Cozmo connected, run the main program.
-
-.. code-block:: bash
-
-   python3.7 main.py
-
-   pip install -r requirements.txt
+10.) To quit the game, hit the X in the top right corner of the Cozmo Taste Game. Alternatively, you may use your phone by pressing disable SDK or by closing the app. 
