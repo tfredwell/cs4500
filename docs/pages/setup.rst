@@ -2,7 +2,7 @@ Setup
 =====
 1. Follow the instructions on https://www.python.org/downloads/ to download and install python 3.7.1
 
-1a. here is a list of install instructions: https://github.com/tfredwell/cs4500/blob/master/Python%20Install%20Instructions.pdf
+ 1a. here is a list of install instructions: https://github.com/tfredwell/cs4500/blob/master/Python%20Install%20Instructions.pdf
 
 2. Download the source code from https://github.com/tfredwell/cs4500/archive/v1.1.zip
 
