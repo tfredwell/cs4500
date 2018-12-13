@@ -2,7 +2,6 @@
 
 Cozmo Build Taste Game project for St. Louis Science Center.
 
-For more information please see our documentation website: https://httpsgithubcommsherman4231cozmotasteproject.readthedocs.io/en/master/
 
 Technical Documentation: https://github.com/tfredwell/cs4500/blob/master/docs/pages/setup.rst
 
