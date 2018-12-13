@@ -2,9 +2,11 @@ Setup
 =====
 1. Follow the instructions on https://www.python.org/downloads/ to download and install python 3.7.1
 
+1a. here is a list of install instructions: https://github.com/tfredwell/cs4500/blob/master/Python%20Install%20Instructions.pdf
+
 2. Download the source code from https://github.com/tfredwell/cs4500/archive/v1.1.zip
 
-3. Unzip the source code
+3. Unzip the source code and run the Batch file "setup". The Cozmo Taste Game Application should be installed on the desktop
 
 4. If you have an android device, follow the steps `here <http://cozmosdk.anki.com/docs/adb.html>`_ to download and install the Android Debug Bridge.
 
