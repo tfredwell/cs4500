@@ -24,28 +24,20 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="Cozmo Build a Plate Game 1.0.0 documentation" href="../index.html"/>
-        <link rel="up" title="cozmo_taste_game package" href="cozmo_taste_game.html"/>
-        <link rel="next" title="cozmo_taste_game.image_recognition package" href="cozmo_taste_game.image_recognition.html"/>
-        <link rel="prev" title="cozmo_taste_game package" href="cozmo_taste_game.html"/> 
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cozmo_taste_game.image_recognition package" href="cozmo_taste_game.image_recognition.html" />
+    <link rel="prev" title="cozmo_taste_game package" href="cozmo_taste_game.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -101,20 +93,16 @@
 <li class="toctree-l1 current"><a class="reference internal" href="cozmo_taste_game.html">cozmo_taste_game package</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">cozmo_taste_game.food package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#module-cozmo_taste_game.food.food_group">cozmo_taste_game.food.food_group module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-cozmo_taste_game.food.food_prop">cozmo_taste_game.food.food_prop module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-cozmo_taste_game.food.food_props">cozmo_taste_game.food.food_props module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cozmo-taste-game-food-food-prop-module">cozmo_taste_game.food.food_prop module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cozmo-taste-game-food-food-props-module">cozmo_taste_game.food.food_props module</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="cozmo_taste_game.image_recognition.html">cozmo_taste_game.image_recognition package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cozmo_taste_game.plate.html">cozmo_taste_game.plate package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cozmo_taste_game.robot.html">cozmo_taste_game.robot package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cozmo_taste_game.html#module-cozmo_taste_game.taster">cozmo_taste_game.taster module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cozmo_taste_game.html#cozmo-taste-game-taster-module">cozmo_taste_game.taster module</a></li>
 </ul>
 </li>
-</ul>
-<p class="caption"><span class="caption-text">Diagrams</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../pages/class_diagrams.html">Class Diagrams</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Image Recognition</span></p>
 <ul>
@@ -135,7 +123,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Cozmo Build a Plate Game</a>
@@ -143,9 +131,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -197,7 +186,12 @@
 <dt id="cozmo_taste_game.food.food_group.FoodGroup">
 <em class="property">class </em><code class="descclassname">cozmo_taste_game.food.food_group.</code><code class="descname">FoodGroup</code><a class="reference internal" href="../_modules/cozmo_taste_game/food/food_group.html#FoodGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cozmo_taste_game.food.food_group.FoodGroup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
-<p>An enumeration.</p>
+<p>A classification of food according to <a class="reference external" href="https://www.choosemyplate.gov/MyPlate">https://www.choosemyplate.gov/MyPlate</a></p>
+<dl class="attribute">
+<dt id="cozmo_taste_game.food.food_group.FoodGroup.dairy">
+<code class="descname">dairy</code><em class="property"> = 4</em><a class="headerlink" href="#cozmo_taste_game.food.food_group.FoodGroup.dairy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="attribute">
 <dt id="cozmo_taste_game.food.food_group.FoodGroup.fruit">
 <code class="descname">fruit</code><em class="property"> = 1</em><a class="headerlink" href="#cozmo_taste_game.food.food_group.FoodGroup.fruit" title="Permalink to this definition">¶</a></dt>
@@ -206,6 +200,11 @@
 <dl class="attribute">
 <dt id="cozmo_taste_game.food.food_group.FoodGroup.grain">
 <code class="descname">grain</code><em class="property"> = 3</em><a class="headerlink" href="#cozmo_taste_game.food.food_group.FoodGroup.grain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="cozmo_taste_game.food.food_group.FoodGroup.oil">
+<code class="descname">oil</code><em class="property"> = 5</em><a class="headerlink" href="#cozmo_taste_game.food.food_group.FoodGroup.oil" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -221,201 +220,17 @@
 </dd></dl>
 
 </div>
-<div class="section" id="module-cozmo_taste_game.food.food_prop">
-<span id="cozmo-taste-game-food-food-prop-module"></span><h2>cozmo_taste_game.food.food_prop module<a class="headerlink" href="#module-cozmo_taste_game.food.food_prop" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="cozmo_taste_game.food.food_prop.FoodProp">
-<em class="property">class </em><code class="descclassname">cozmo_taste_game.food.food_prop.</code><code class="descname">FoodProp</code><a class="reference internal" href="../_modules/cozmo_taste_game/food/food_prop.html#FoodProp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cozmo_taste_game.food.food_prop.FoodProp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
-<p>Abstract Food Prop interface.</p>
-<dl class="attribute">
-<dt id="cozmo_taste_game.food.food_prop.FoodProp.color">
-<code class="descname">color</code><a class="headerlink" href="#cozmo_taste_game.food.food_prop.FoodProp.color" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="cozmo_taste_game.food.food_prop.FoodProp.food_groups">
-<code class="descname">food_groups</code><a class="headerlink" href="#cozmo_taste_game.food.food_prop.FoodProp.food_groups" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
+<div class="section" id="cozmo-taste-game-food-food-prop-module">
+<h2>cozmo_taste_game.food.food_prop module<a class="headerlink" href="#cozmo-taste-game-food-food-prop-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-cozmo_taste_game.food.food_props">
-<span id="cozmo-taste-game-food-food-props-module"></span><h2>cozmo_taste_game.food.food_props module<a class="headerlink" href="#module-cozmo_taste_game.food.food_props" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="cozmo_taste_game.food.food_props.Banana">
-<em class="property">class </em><code class="descclassname">cozmo_taste_game.food.food_props.</code><code class="descname">Banana</code><a class="reference internal" href="../_modules/cozmo_taste_game/food/food_props.html#Banana"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cozmo_taste_game.food.food_props.Banana" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cozmo_taste_game.food.food_prop.FoodProp" title="cozmo_taste_game.food.food_prop.FoodProp"><code class="xref py py-class docutils literal notranslate"><span class="pre">cozmo_taste_game.food.food_prop.FoodProp</span></code></a></p>
-<dl class="attribute">
-<dt id="cozmo_taste_game.food.food_props.Banana.color">
-<code class="descname">color</code><a class="headerlink" href="#cozmo_taste_game.food.food_props.Banana.color" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cozmo_taste_game.food.food_props.Blueberry">
-<em class="property">class </em><code class="descclassname">cozmo_taste_game.food.food_props.</code><code class="descname">Blueberry</code><a class="reference internal" href="../_modules/cozmo_taste_game/food/food_props.html#Blueberry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cozmo_taste_game.food.food_props.Blueberry" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cozmo_taste_game.food.food_prop.FoodProp" title="cozmo_taste_game.food.food_prop.FoodProp"><code class="xref py py-class docutils literal notranslate"><span class="pre">cozmo_taste_game.food.food_prop.FoodProp</span></code></a></p>
-<dl class="attribute">
-<dt id="cozmo_taste_game.food.food_props.Blueberry.color">
-<code class="descname">color</code><a class="headerlink" href="#cozmo_taste_game.food.food_props.Blueberry.color" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cozmo_taste_game.food.food_props.Broccoli">
-<em class="property">class </em><code class="descclassname">cozmo_taste_game.food.food_props.</code><code class="descname">Broccoli</code><a class="reference internal" href="../_modules/cozmo_taste_game/food/food_props.html#Broccoli"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cozmo_taste_game.food.food_props.Broccoli" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cozmo_taste_game.food.food_prop.FoodProp" title="cozmo_taste_game.food.food_prop.FoodProp"><code class="xref py py-class docutils literal notranslate"><span class="pre">cozmo_taste_game.food.food_prop.FoodProp</span></code></a></p>
-<dl class="attribute">
-<dt id="cozmo_taste_game.food.food_props.Broccoli.color">
-<code class="descname">color</code><a class="headerlink" href="#cozmo_taste_game.food.food_props.Broccoli.color" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="cozmo_taste_game.food.food_props.Broccoli.food_groups">
-<code class="descname">food_groups</code><a class="headerlink" href="#cozmo_taste_game.food.food_props.Broccoli.food_groups" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cozmo_taste_game.food.food_props.Carrot">
-<em class="property">class </em><code class="descclassname">cozmo_taste_game.food.food_props.</code><code class="descname">Carrot</code><a class="reference internal" href="../_modules/cozmo_taste_game/food/food_props.html#Carrot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cozmo_taste_game.food.food_props.Carrot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cozmo_taste_game.food.food_prop.FoodProp" title="cozmo_taste_game.food.food_prop.FoodProp"><code class="xref py py-class docutils literal notranslate"><span class="pre">cozmo_taste_game.food.food_prop.FoodProp</span></code></a></p>
-<dl class="attribute">
-<dt id="cozmo_taste_game.food.food_props.Carrot.color">
-<code class="descname">color</code><a class="headerlink" href="#cozmo_taste_game.food.food_props.Carrot.color" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cozmo_taste_game.food.food_props.Cheese">
-<em class="property">class </em><code class="descclassname">cozmo_taste_game.food.food_props.</code><code class="descname">Cheese</code><a class="reference internal" href="../_modules/cozmo_taste_game/food/food_props.html#Cheese"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cozmo_taste_game.food.food_props.Cheese" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cozmo_taste_game.food.food_prop.FoodProp" title="cozmo_taste_game.food.food_prop.FoodProp"><code class="xref py py-class docutils literal notranslate"><span class="pre">cozmo_taste_game.food.food_prop.FoodProp</span></code></a></p>
-<dl class="attribute">
-<dt id="cozmo_taste_game.food.food_props.Cheese.color">
-<code class="descname">color</code><a class="headerlink" href="#cozmo_taste_game.food.food_props.Cheese.color" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cozmo_taste_game.food.food_props.Corn">
-<em class="property">class </em><code class="descclassname">cozmo_taste_game.food.food_props.</code><code class="descname">Corn</code><a class="reference internal" href="../_modules/cozmo_taste_game/food/food_props.html#Corn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cozmo_taste_game.food.food_props.Corn" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cozmo_taste_game.food.food_prop.FoodProp" title="cozmo_taste_game.food.food_prop.FoodProp"><code class="xref py py-class docutils literal notranslate"><span class="pre">cozmo_taste_game.food.food_prop.FoodProp</span></code></a></p>
-<dl class="attribute">
-<dt id="cozmo_taste_game.food.food_props.Corn.color">
-<code class="descname">color</code><a class="headerlink" href="#cozmo_taste_game.food.food_props.Corn.color" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cozmo_taste_game.food.food_props.Cupcake">
-<em class="property">class </em><code class="descclassname">cozmo_taste_game.food.food_props.</code><code class="descname">Cupcake</code><a class="reference internal" href="../_modules/cozmo_taste_game/food/food_props.html#Cupcake"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cozmo_taste_game.food.food_props.Cupcake" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cozmo_taste_game.food.food_prop.FoodProp" title="cozmo_taste_game.food.food_prop.FoodProp"><code class="xref py py-class docutils literal notranslate"><span class="pre">cozmo_taste_game.food.food_prop.FoodProp</span></code></a></p>
-<dl class="attribute">
-<dt id="cozmo_taste_game.food.food_props.Cupcake.color">
-<code class="descname">color</code><a class="headerlink" href="#cozmo_taste_game.food.food_props.Cupcake.color" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cozmo_taste_game.food.food_props.Grapes">
-<em class="property">class </em><code class="descclassname">cozmo_taste_game.food.food_props.</code><code class="descname">Grapes</code><a class="reference internal" href="../_modules/cozmo_taste_game/food/food_props.html#Grapes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cozmo_taste_game.food.food_props.Grapes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cozmo_taste_game.food.food_prop.FoodProp" title="cozmo_taste_game.food.food_prop.FoodProp"><code class="xref py py-class docutils literal notranslate"><span class="pre">cozmo_taste_game.food.food_prop.FoodProp</span></code></a></p>
-<dl class="attribute">
-<dt id="cozmo_taste_game.food.food_props.Grapes.color">
-<code class="descname">color</code><a class="headerlink" href="#cozmo_taste_game.food.food_props.Grapes.color" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cozmo_taste_game.food.food_props.Hotdog">
-<em class="property">class </em><code class="descclassname">cozmo_taste_game.food.food_props.</code><code class="descname">Hotdog</code><a class="reference internal" href="../_modules/cozmo_taste_game/food/food_props.html#Hotdog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cozmo_taste_game.food.food_props.Hotdog" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cozmo_taste_game.food.food_prop.FoodProp" title="cozmo_taste_game.food.food_prop.FoodProp"><code class="xref py py-class docutils literal notranslate"><span class="pre">cozmo_taste_game.food.food_prop.FoodProp</span></code></a></p>
-<dl class="attribute">
-<dt id="cozmo_taste_game.food.food_props.Hotdog.color">
-<code class="descname">color</code><a class="headerlink" href="#cozmo_taste_game.food.food_props.Hotdog.color" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="cozmo_taste_game.food.food_props.Hotdog.food_groups">
-<code class="descname">food_groups</code><a class="headerlink" href="#cozmo_taste_game.food.food_props.Hotdog.food_groups" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cozmo_taste_game.food.food_props.Milk">
-<em class="property">class </em><code class="descclassname">cozmo_taste_game.food.food_props.</code><code class="descname">Milk</code><a class="reference internal" href="../_modules/cozmo_taste_game/food/food_props.html#Milk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cozmo_taste_game.food.food_props.Milk" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cozmo_taste_game.food.food_prop.FoodProp" title="cozmo_taste_game.food.food_prop.FoodProp"><code class="xref py py-class docutils literal notranslate"><span class="pre">cozmo_taste_game.food.food_prop.FoodProp</span></code></a></p>
-<dl class="attribute">
-<dt id="cozmo_taste_game.food.food_props.Milk.color">
-<code class="descname">color</code><a class="headerlink" href="#cozmo_taste_game.food.food_props.Milk.color" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cozmo_taste_game.food.food_props.Orange">
-<em class="property">class </em><code class="descclassname">cozmo_taste_game.food.food_props.</code><code class="descname">Orange</code><a class="reference internal" href="../_modules/cozmo_taste_game/food/food_props.html#Orange"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cozmo_taste_game.food.food_props.Orange" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cozmo_taste_game.food.food_prop.FoodProp" title="cozmo_taste_game.food.food_prop.FoodProp"><code class="xref py py-class docutils literal notranslate"><span class="pre">cozmo_taste_game.food.food_prop.FoodProp</span></code></a></p>
-<dl class="attribute">
-<dt id="cozmo_taste_game.food.food_props.Orange.color">
-<code class="descname">color</code><a class="headerlink" href="#cozmo_taste_game.food.food_props.Orange.color" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cozmo_taste_game.food.food_props.Watermelon">
-<em class="property">class </em><code class="descclassname">cozmo_taste_game.food.food_props.</code><code class="descname">Watermelon</code><a class="reference internal" href="../_modules/cozmo_taste_game/food/food_props.html#Watermelon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cozmo_taste_game.food.food_props.Watermelon" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cozmo_taste_game.food.food_prop.FoodProp" title="cozmo_taste_game.food.food_prop.FoodProp"><code class="xref py py-class docutils literal notranslate"><span class="pre">cozmo_taste_game.food.food_prop.FoodProp</span></code></a></p>
-<dl class="attribute">
-<dt id="cozmo_taste_game.food.food_props.Watermelon.color">
-<code class="descname">color</code><a class="headerlink" href="#cozmo_taste_game.food.food_props.Watermelon.color" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="cozmo_taste_game.food.food_props.Watermelon.food_groups">
-<code class="descname">food_groups</code><a class="headerlink" href="#cozmo_taste_game.food.food_props.Watermelon.food_groups" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="function">
-<dt id="cozmo_taste_game.food.food_props.get_food">
-<code class="descclassname">cozmo_taste_game.food.food_props.</code><code class="descname">get_food</code><span class="sig-paren">(</span><em>food_type: str</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cozmo_taste_game/food/food_props.html#get_food"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cozmo_taste_game.food.food_props.get_food" title="Permalink to this definition">¶</a></dt>
-<dd><p>Factory function</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>food_type</strong> – String representing what food to return</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Reference to the suitable static food object</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Exception:</th><td class="field-body">KeyError if food_type isn’t in dictionary</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
+<div class="section" id="cozmo-taste-game-food-food-props-module">
+<h2>cozmo_taste_game.food.food_props module<a class="headerlink" href="#cozmo-taste-game-food-food-props-module" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -433,11 +248,11 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, The Cozmopolitans.
+        &copy; Copyright 2018, The Cozmopolitans
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -452,35 +267,23 @@
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'1.0.0',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

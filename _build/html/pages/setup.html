@@ -24,27 +24,20 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="Cozmo Build a Plate Game 1.0.0 documentation" href="../index.html"/>
-        <link rel="next" title="Basic Program Flow" href="basic_program_flow.html"/>
-        <link rel="prev" title="Cozmo Taste Game Documentation" href="../index.html"/> 
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Basic Program Flow" href="basic_program_flow.html" />
+    <link rel="prev" title="Cozmo Taste Game Documentation" href="../index.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -99,10 +92,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../cozmo_taste_game/cozmo_taste_game.html">cozmo_taste_game package</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Diagrams</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="class_diagrams.html">Class Diagrams</a></li>
-</ul>
 <p class="caption"><span class="caption-text">Image Recognition</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="how_to_train.html">How to Train Cozmo to Recognize a New Food</a></li>
@@ -122,7 +111,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Cozmo Build a Plate Game</a>
@@ -130,9 +119,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -176,26 +166,26 @@
             
   <div class="section" id="setup">
 <h1>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h1>
-<p>RFID - Radio-Frequency Identification
-Game Setup Instructions – Windows/Mac – program is not optimized for Linux distributions</p>
-<p>1.) Follow the instructions on <a class="reference external" href="https://www.python.org/downloads/">https://www.python.org/downloads/</a> to download and install python 3.7.  We used the Pycharm python community editor.  <a class="reference external" href="https://www.jetbrains.com/pycharm/download/#section=windows">https://www.jetbrains.com/pycharm/download/#section=windows</a>.</p>
+<p>Key Terms -</p>
+<p>RFID - Radio-Frequency Identification</p>
+<p>Game Setup Instructions – Windows/Mac – <strong>program is not optimized for Linux distributions</strong></p>
+<p>1.) Follow the instructions on <a class="reference external" href="https://www.python.org/downloads/">https://www.python.org/downloads/</a> to download and install python 3.7.0  We used the Pycharm python community editor. <a class="reference external" href="https://www.jetbrains.com/pycharm/download/#section=windows">https://www.jetbrains.com/pycharm/download/#section=windows</a>.</p>
 <p>1a.) Clone the repository onto your local machine- on the command line type:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/tfredwell/cs4500.git
 </pre></div>
 </div>
 <p>1b.) Navigate to the repository.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> CozmoTasteProject.
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> cs4500
 </pre></div>
 </div>
 <p>1c.) Install the Wx Library - First you need to add the path:</p>
 <blockquote>
-<div>C:UsersPCNameAppDataLocalProgramsPythonPython37-32Scripts</div></blockquote>
-<p>to Environment Variable</p>
-<p>2.)  Next open the command prompt and type:</p>
+<div>C:\Users\[PCName]\AppData\Local\Programs\Python\Python37-32\Scripts to Environment Variable</div></blockquote>
+<p>2.) Next open the command prompt and type:</p>
 <blockquote>
 <div>pip install wxpython</div></blockquote>
-<p>3.)  After that, open PyCharm and add the recently installed library to your environment.</p>
-<p>4.)  –Navigate to File -&gt; Settings -&gt; Project. Under Project, click the plus bottom and the list of available packages will show. When you find the wxpython package, click Install package.</p>
+<p>3.) After that, open PyCharm and add the recently installed library to your environment.</p>
+<p>4.) Navigate to File -&gt; Settings -&gt; Project. Under Project, click the plus bottom and the list of available packages will show. When you find the wxpython package, click Install package.</p>
 <p>5.) Install all dependencies located within the requirements text file installed – download application and type pip install -r  requirements.txt</p>
 <dl class="docutils">
 <dt>6.) Make sure to install Itunes on Windows machines: <a class="reference external" href="https://support.apple.com/downloads/itunes">https://support.apple.com/downloads/itunes</a></dt>
@@ -203,25 +193,24 @@ Game Setup Instructions – Windows/Mac – program is not optimized for Linux d
 </dl>
 <p>7.) Once the programs have been installed, connect the USB cord to the USB port and to either the phone or tablet with the Cozmo app installed. (picture of setup)</p>
 <p>8.) Connect the phone or tablet to Cozmo via wifi. Open the Cozmo app, once on screen hit connect, the app will then start searching for Cozmo. If Cozmo is not found, follow the onscreen instructions to continue.</p>
-<p>– On the connected cell phone, turn off cellular data, make sure the device is not set to auto connect to any other network during gameplay. Possibly forget every network on the device and reconnect them at a later time. Otherwise, Cozmo will disconnect and will not respond.
-– If you still need further assistance with this step Follow step 1-4 under Starting Up the SDK <a class="reference external" href="http://cozmosdk.anki.com/docs/getstarted.html#starting-up-the-sdk">http://cozmosdk.anki.com/docs/getstarted.html#starting-up-the-sdk</a> to connect Cozmo in SDK mode.</p>
-<p>8.) After successfully connecting to Cozmo, Double click the downloaded CozmoTasteGame app on the computer and click the start game button with Cozmos face under game controls.</p>
+<p>– On the connected cell phone, turn off cellular data, make sure the device is not set to auto connect to any other network during gameplay. Possibly forget every network on the device and reconnect them at a later time. Otherwise, Cozmo will disconnect and will not respond.</p>
+<p>– If you still need further assistance with this step Follow step 1-4 under Starting Up the SDK <a class="reference external" href="http://cozmosdk.anki.com/docs/getstarted.html#starting-up-the-sdk">http://cozmosdk.anki.com/docs/getstarted.html#starting-up-the-sdk</a> to connect Cozmo in SDK mode.</p>
+<p>8.) After successfully connecting to Cozmo, Double click the downloaded Cozmo Taste Game application on the computer and click the start game button with Cozmos face under game controls.</p>
 <p>9.) Cozmo will then instruct you on which food he would like to taste.</p>
-<p>10.) To replay the game or to have Cozmo change which food group he would like to taste simply press the (start game) button again.</p>
+<p>10.) To replay the game or to have Cozmo change which food group he would like to taste press the (start game) button again.</p>
 <p>11.) To quit the game, hit the X in the top right corner of the Cozmo Taste Game. Alternatively, you may use your phone by pressing disable SDK or by simply closing the app.</p>
+<hr class="docutils" />
 <p>Potential Issues with gameplay:</p>
 <p>-Do not try to use ios device on Linux as it will not work properly.</p>
 <p>-Connect Cozmo and RFID readers to a computer that has the proper software installed ( Listed above) or the program will not work properly.</p>
 <p>-Each food item is assigned to only one food group.</p>
 <p>–Example– Peanuts would be considered a grain in this game even though it can be used as a protein.</p>
-<p>-iPhone issues– could not connect to Cozmo unless you first launch iTunes, the initial opening of iTunes allows the successful communication of an IOS device to the Cozmo robot.</p>
+<p>-iPhone issues – could not connect to Cozmo unless you first launch iTunes, the initial opening of iTunes allows the successful communication of an IOS device to the Cozmo robot.</p>
 </div>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -239,11 +228,11 @@ Game Setup Instructions – Windows/Mac – program is not optimized for Linux d
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, The Cozmopolitans.
+        &copy; Copyright 2018, The Cozmopolitans
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -258,35 +247,23 @@ Game Setup Instructions – Windows/Mac – program is not optimized for Linux d
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'1.0.0',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>
