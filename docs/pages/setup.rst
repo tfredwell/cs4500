@@ -10,9 +10,9 @@ Setup
 
 5. Connect the phone or tablet to Cozmo via wifi. Open the Cozmo app, once on screen hit connect, the app will then start searching for Cozmo. If Cozmo is not found follow the onscreen instructions to continue.
 
--On the connected device, turn off data, make sure the device is not set to auto connect to any other network during gameplay. Possibly forget every network on the device and reconnect them at a later time. Otherwise, Cozmo will disconnect and will not respond.
+On the connected device, turn off data, make sure the device is not set to auto connect to any other network during gameplay. Possibly forget every network on the device and reconnect them at a later time. Otherwise, Cozmo will disconnect and will not respond.
 
--If you still need further assistance with this step Follow step 1-4 under Starting Up the SDK http://cozmosdk.anki.com/docs/getstarted.html#starting-up-the-sdk to connect Cozmo in SDK mode.
+If you still need further assistance with this step Follow step 1-4 under Starting Up the SDK http://cozmosdk.anki.com/docs/getstarted.html#starting-up-the-sdk to connect Cozmo in SDK mode.
 
 6. After successfully connecting to Cozmo, Double click the downloaded CozmoTasteGame app on the computer and click  the start game button with Cozmos face under game controls. 
 
