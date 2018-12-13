@@ -1,6 +1,5 @@
 Setup
 =====
-
 1. Follow the instructions on https://www.python.org/downloads/ to download and install python 3.7.1
 
 2. Download the source code from https://github.com/tfredwell/cs4500/archive/v1.1.zip
