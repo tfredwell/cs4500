@@ -9,7 +9,7 @@ Users Documentation: https://docs.google.com/document/d/1LqF_U3-tHvY6XhqdeqVIEKb
 
 Basic Program Flow: https://github.com/tfredwell/cs4500/blob/master/docs/pages/basic_program_flow.rst
 
-
+Credits: https://github.com/tfredwell/cs4500/blob/master/docs/pages/credits.rst
 
 
 
